@@ -15,13 +15,30 @@ class tipoNotario extends Controller
     }
     public function index()
     {
-        // load views
+        $tipoNotario = $this->model->getTipoNotario();
         require APP . 'view/_templates/header.php';
         require APP . 'view/tipoNotario/tipoNotario.php';
         require APP . 'view/_templates/footer.php';
-    }
-        public function addTipoNotario(){
-$this->model->addTipoNotario($_POST['TxtCodigoTN'],$_POST['TxtNombreTipoNotario'],$_POST['TxtEstadoTipoNotario']);
+    
 
     }
+        public function addTipoNotario(){
+        $this->model->addTipoNotario($_POST['TxtCodigoTN'],$_POST['TxtNombreTipoNotario'],$_POST['TxtEstadoTipoNotario']);
+
+    }
+
+    public function UpdateTipoNotario()
+    {
+    $this->model->UpdateTipoNotario($_POST['TxtCodigoTN'],$_POST['TxtNombreTipoNotario'],$_POST['TxtEstadoTipoNotario']);
+    }
+
+
+     public function deleteTipoNotario($idTipo_notario)
+    {
+        if (isset($idTipo_notario)) {
+            $this->model->deleteTipoNotario($idTipo_notario);
+        }
+        header('location: ' . URL . 'tipoNotario');
+    }
+
 }

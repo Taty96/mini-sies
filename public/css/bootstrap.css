@@ -2256,9 +2256,10 @@ th {
   text-align: left;
 }
 .table {
-  width: 100%;
-  max-width: 100%;
+  width: 90%;
+  max-width: 90%;
   margin-bottom: 20px;
+  margin: 90px;
 }
 .table > thead > tr > th,
 .table > tbody > tr > th,
@@ -2316,7 +2317,7 @@ th {
   background-color: #f9f9f9;
 }
 .table-hover > tbody > tr:hover {
-  background-color: #f5f5f5;
+  background-color: #C3E3D9;
 }
 table col[class*="col-"] {
   position: static;

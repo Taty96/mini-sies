@@ -17,18 +17,18 @@
 	<table>
 	<tr>
 		<td><label for="">Nombre del requisito</label></td>
-		<td class="td"><input type="text" class="form-control" placeholder="Nombre del requisito"></td>
+		<td class="td"><input type="text" class="form-control" id="textNombrerequisito" placeholder="Nombre del requisito"></td>
 	</tr>
 	<tr>
-		<td><label for="">Requerido</label></td>
+		<td><label for="">Opcional</label></td>
 		<td>
 			<div class="checkbox">
 	          <label>
-	            <input type="checkbox"><span class="checkbox-material"><span class="check"></span></span> Requerido
+	            <input type="checkbox" id="CkOpcional"><span class="checkbox-material"><span class="check"></span></span> Requerido
 	          </label>
 	        </div>
 		</td>
 	</tr>
 	</table>
-	<button class="btn btn-material-grey-500">Cancelar</button><button class="btn btn-material-red-800">Guardar</button>
+	<button class="btn btn-material-grey-500">Cancelar</button><button id="btn_Add_Requi" type="submit" data-dismiss="modal" class="btn btn-material-red-800">Guardar</button>
 </div>

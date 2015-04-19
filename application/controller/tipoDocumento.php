@@ -10,15 +10,37 @@
  */
 class tipoDocumento extends Controller
 {
-    /**
-     * PAGE: index
-     * This method handles the error page that will be shown when a page is not found
-     */
+   function __construct(){
+        parent::__construct("ModelTipoDocu");
+    }
     public function index()
     {
-        // load views
+
+
+        $tipoDocumento = $this->model->getTipoDocumento();
+
         require APP . 'view/_templates/header.php';
         require APP . 'view/tipoDocumento/tipoDocumento.php';
         require APP . 'view/_templates/footer.php';
     }
+    
+    public function addTipoDocumento(){
+    $this->model->addTipoDocumento($_POST['TxtNombre'], $_POST['TxtSufijo']);
+
+    }
+
+    public function UpdateDocumento()
+    {
+        $this->model->UpdateDocumento($_POST['TxtDocumento'],$_POST['TxtNombre'], $_POST['TxtSufijo']);
+    }
+
+
+        public function deleteTipodocumento($IdTipoDocumento)
+    {
+        if (isset($IdTipoDocumento)) {
+            $this->model->deleteTipodocumento($IdTipoDocumento);
+        }
+        header('location: ' . URL . 'tipoDocumento');
+    }
+
 }

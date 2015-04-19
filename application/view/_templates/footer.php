@@ -1,6 +1,11 @@
     <!-- jQuery, loaded in the recommended protocol-less way -->
-    <!-- more http://www.paulirish.com/2010/the-protocol-relative-url/ -->
+   
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js"></script>
+    >
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <script src="<?php echo URL; ?>js/Tabla.js" type="text/javascript"></script>
 
     <!-- define the project's URL (to make AJAX calls possible, even when using this in sub-folders etc) -->
     <script>
