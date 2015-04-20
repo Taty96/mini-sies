@@ -14,24 +14,52 @@
 		width: 400px;
 	}
 </style>
-<div class="span7 center" align="center">
+
+
+<script >
+
+window.onload = function () {
+document.formularioinfo.TxtNombreTipoNotario.focus();
+document.formularioinfo.addEventListener('submit', validarFormulario);
+}
+ 
+function validarFormulario() {
+
+var todoCorrecto = true;
+var formulario = document.formularioinfo;
+for (var i=0; i<formulario.length; i++) {
+                if(formulario[i].type =='text') {
+                               if (formulario[i].value == null || formulario[i].value.length == 0 || /^\s*$/.test(formulario[i].value)){
+                               alertify.alert(formulario[i].name+ ' <h4>No puede estar vacío o contener sólo espacios en blanco</h4>');
+                               todoCorrecto=false;
+                               }
+                }
+                }
+return todoCorrecto;
+}
+</script>
+
+
+<form name="formularioinfo"> 
+  <div class="span7 center" align="center" >
 	<table>
 	<tr>
 		<td><label for="">Codigo Tipo Notario</label></td>
-		<td class="td"><input type="text" class="form-control" id="TxtCodigoTN"placeholder="Nombre del tipo de notario"></td>
+		<td class="td"><input type="text" class="form-control" id="TxtCodigoTN"placeholder="Nombre del tipo de notario" required></td>
 
 	</tr>
 	<tr>
 		<td><label for="">Nombre del tipo de notario</label></td>
-		<td class="td"><input type="text" class="form-control" id="TxtNombreTipoNotario"placeholder="Nombre del tipo de notario"></td>
+		<td class="td"><input type="text" class="form-control"  maxlength="10" onkeyup="return ismaxlengt(this)" id="TxtNombreTipoNotario"placeholder="Nombre del tipo de notario" required></td>
 	</tr>
 	<tr>
 		<td><label for="">Estado Tipo Notario</label></td>
-		<td class="td"><input type="text" class="form-control" id="TxtEstadoTipoNotario" placeholder="Nombre del tipo de notario"></td>
+		<td class="td"><input type="text" class="form-control" maxlength="2" onkeyup="return ismaxlengt(this)" id="TxtEstadoTipoNotario" placeholder="Nombre del tipo de notario" required></td>
 	</tr>
 	</table>
 	<button type="submit" class="btn btn-material-grey-500" style="display:none;"data-dismiss="modal" id="btn_Update_TipoNotario"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Actualizar</button><button id="btn_Add_TipoN" type="submit" data-dismiss="modal" class="btn btn-material-red-800"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Guardar</button>
 </div>
+</form>>
 
 <div class="span6" id="div1">
 	<table class="table table-hover" id="FondoT">

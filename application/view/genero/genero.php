@@ -13,7 +13,35 @@
 		width: 400px;
 	}
 </style>
-<div class="span7 center" align="center">
+
+	<script >
+
+window.onload = function () {
+document.formularioinfo.TxtNombreGenero.focus();
+document.formularioinfo.addEventListener('submit', validarFormulario);
+}
+ 
+function validarFormulario() {
+
+var todoCorrecto = true;
+var formulario = document.formularioinfo;
+for (var i=0; i<formulario.length; i++) {
+                if(formulario[i].type =='text') {
+                               if (formulario[i].value == null || formulario[i].value.length == 0 || /^\s*$/.test(formulario[i].value)){
+                               alertify.alert(formulario[i].name+ ' <h4>No puede estar vacío o contener sólo espacios en blanco</h4>');
+                               todoCorrecto=false;
+                               }
+                }
+                }
+return todoCorrecto;
+}
+</script>
+
+
+	
+
+<form  name="formularioinfo">
+<div class="span7 center" align="center" >
 	<table>
 	<tr>
 		<td><label for="">Id Genero</label></td>
@@ -22,11 +50,12 @@
 
 	<tr>
 		<td><label for="">Nombre del genero</label></td>
-		<td class="td"><input type="text" id ="TxtNombreGenero" class="form-control" placeholder="Nombre del genero"></td>
+		<td class="td"><input type="text" maxlength="10" onkeyup="return ismaxlengt(this)" id ="TxtNombreGenero" class="form-control" placeholder="Nombre del genero" required></td>
 	</tr>
 	</table>
 	<button type="submit" class="btn btn-material-grey-500" style="display:none;"data-dismiss="modal" id="btn_Update_Genero"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Actualizar</button><button id="btn_Add_Genero" type="submit" data-dismiss="modal" class="btn btn-material-red-800"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Guardar</button>
 </div>
+</form>
 
 
 
@@ -54,9 +83,7 @@
 		<?php } ?>
 
 		<script type="text/javascript">
- 
- 
-}
+
 </script>
 
 		

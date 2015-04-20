@@ -13,21 +13,22 @@
 		width: 400px;
 	}
 </style>
+
 <script >
 
 window.onload = function () {
-document.formularioContacto.TxtNVA.focus();
-document.formularioContacto.addEventListener('submit', validarFormulario);
+document.formularioinfo.TxtNVA.focus();
+document.formularioinfo.addEventListener('submit', validarFormulario);
 }
  
 function validarFormulario() {
 
 var todoCorrecto = true;
-var formulario = document.formularioContacto;
+var formulario = document.formularioinfo;
 for (var i=0; i<formulario.length; i++) {
                 if(formulario[i].type =='text') {
                                if (formulario[i].value == null || formulario[i].value.length == 0 || /^\s*$/.test(formulario[i].value)){
-                               alert (formulario[i].name+ ' no puede estar vacío o contener sólo espacios en blanco');
+                               alertify.alert(formulario[i].name+ ' <h4>No puede estar vacío o contener sólo espacios en blanco</h4>');
                                todoCorrecto=false;
                                }
                 }
@@ -49,31 +50,27 @@ obj.value=obj.value.substring(0,mlength)
  
 </script>
 
-<form name="formularioContacto">
+<form name="formularioinfo">
 	<div class="span7 center" align="center">
 	
 	<table>
 
-	<tr >
-		<td><label for="">ID Empleado</label></td>
-		<td class="td"><input type="text" class="form-control" id="TxtIDTU" readonly="readonly" placeholder="ID de Empleado"></td>
-
-	</tr>
+	
 	<tr>
 		<td><label for="">Nivel de Acceso</label></td>
-		<td class="td"><input type="text" class="form-control" id="TxtNVA"placeholder="Nivel de Acceso" required></td>
+		<td class="td"><input type="text" class="form-control" maxlength="12" onkeyup="return ismaxlengt(this)" id="TxtNVA"placeholder="Nivel de Acceso" required tabindex="1" ></td>
 
 	</tr>
 	<tr>
 		<td><label for="">Nombre Empleado</label></td>
-		<td class="td"><input type="text" class="form-control" maxlength="12" onkeyup="return ismaxlengt(this)"id="TxtNombre"placeholder="NombTipo Empleadore "></td>
+		<td class="td"><input type="text" class="form-control" maxlength="12" onkeyup="return ismaxlengt(this)"id="TxtNombre"placeholder="NombTipo Empleadore " required tabindex="2" ></td>
 	</tr>
 	<tr>
 		<td><label for="">Estado</label></td>
-		<td class="td"><input type="text" class="form-control" id="TxtEstado" placeholder="Estado"></td>
+		<td class="td"><input type="text" class="form-control" maxlength="2" onkeyup="return ismaxlengt(this)"id="TxtEstado" placeholder="Estado" required tabindex="3" ></td>
 	</tr>
 	</table>
-	<button type="submit" class="btn btn-material-grey-500" style="display:none;"data-dismiss="modal" id="btn_Update_TipoEmple"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Actualizar</button><button id="btn_Add_TipoEmple" type="submit" data-dismiss="modal" class="btn btn-material-red-800"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Guardar</button>
+	<button type="submit" class="btn btn-material-grey-500" style="display:none;"data-dismiss="modal"  tabindex="5" id="btn_Update_TipoEmple"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Actualizar</button ><button  tabindex="4" id="btn_Add_TipoEmple" type="submit" data-dismiss="modal" class="btn btn-material-red-800"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Guardar</button>
 	</div>
 </form>
 
@@ -94,7 +91,7 @@ obj.value=obj.value.substring(0,mlength)
 		
 		<?php foreach ($tiposEmpleado as $value) {?>
 			<tr>
-				<td><?php echo $value->IdTipo_Empleado; ?></td>
+				<td><?php echo $value->IdTipoEmpleado; ?></td>
 				<td><?php echo $value->NivelAcceso; ?></td>
 				<td><?php echo $value->Nombre; ?></td>
 				<td><?php echo $value->Estado; ?></td>

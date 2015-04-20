@@ -68,6 +68,17 @@ class ModelNotario
    }
 
 
+
+
+
+
+
+
+
+
+   
+
+
 }
 ?>
 

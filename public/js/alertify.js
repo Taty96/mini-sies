@@ -50,7 +50,7 @@
             position:'bottom-right'
         },
         glossary:{
-            title:'<h3>Se registro exitosamente</h3>',
+            title:'',
             ok: 'Aceptar',
             cancel: 'Cancel',
             acccpt: 'Accept',

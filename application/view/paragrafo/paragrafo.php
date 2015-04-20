@@ -17,18 +17,18 @@
 	<table>
     <tr>
 		<td><label for="">Codigo Paragrafo</label></td>
-		<td class="td"><input type="text" readonly="readonly" id="TxtCParagrafo"class="form-control" placeholder="Codigo Paragrafo"></td>
+		<td class="td"><input type="text" readonly="readonly" id="TxtCParagrafo"class="form-control" placeholder="Codigo Paragrafo" required tabindex="1"></td>
 	</tr>
 	<tr>
 		<td><label for="">Nombre Paragrafo</label></td>
-		<td class="td"><input type="text" id="TxtNombre" class="form-control" placeholder="Nombre Paragrafo"></td>
+		<td class="td"><input type="text" maxlength="6" onkeyup="return ismaxlengt(this)" id="TxtNombre" class="form-control" placeholder="Nombre Paragrafo" required tabindex="2"></td>
 	</tr>
 	<tr>
 		<td><label for="">Descripcion Paragrafo</label></td>
-		<td class="td"><input type="text" id="TxtDescripcion" class="form-control" placeholder="Descripcion Paragrafo"></td>
+		<td class="td"><input type="text" maxlength="40" onkeyup="return ismaxlengt(this)" id="TxtDescripcion" class="form-control" placeholder="Descripcion Paragrafo" required tabindex="3"></td>
 	</tr>
 	</table>
-	<button type="submit" class="btn btn-material-grey-500" style="display:none;"data-dismiss="modal" id="btn_Update_Paragrafo"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Actualizar</button><button id="btn_Add_Paragrafo" type="submit" data-dismiss="modal" class="btn btn-material-red-800"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Guardar</button>
+	<button type="submit" class="btn btn-material-grey-500" style="display:none;"data-dismiss="modal" tabindex="5" id="btn_Update_Paragrafo"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Actualizar</button><button tabindex="4" id="btn_Add_Paragrafo" type="submit" data-dismiss="modal" class="btn btn-material-red-800"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Guardar</button>
 </div>
 
 <div class="span6" id="div1">

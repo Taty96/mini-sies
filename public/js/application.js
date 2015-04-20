@@ -93,7 +93,7 @@ $('#btn_Add_TipoN').on('click', function(){
         Estado = $("#TxtEstadoTipoNotario").val();
       
 
-
+            if (validarFormulario()) {
             // send an ajax-request to this URL: current-server.com/songs/ajaxGetStats
             // "url" is defined in views/_templates/footer.php
             $.ajax({
@@ -121,6 +121,7 @@ $('#btn_Add_TipoN').on('click', function(){
             .always(function() {
                     // this will ALWAYS be executed, regardless if the ajax-call was success or not
                 });
+            };
         });
 }
 
@@ -132,7 +133,7 @@ $('#btn_Add_TipoN').on('click', function(){
         Nombre = $("#TxtNombreGenero").val();
       
 
-
+            if (validarFormulario()) {
             // send an ajax-request to this URL: current-server.com/songs/ajaxGetStats
             // "url" is defined in views/_templates/footer.php
             $.ajax({
@@ -159,6 +160,8 @@ $('#btn_Add_TipoN').on('click', function(){
             .always(function() {
                     // this will ALWAYS be executed, regardless if the ajax-call was success or not
                 });
+
+            };
         });
 }
 
@@ -169,9 +172,9 @@ $('#btn_Add_TipoN').on('click', function(){
         Nombre = $("#TxtNombre").val();
         Sufijo = $("#TxtSufijo").val();
 
-        alert(Nombre);
+        
 
-
+            if (validarFormulario()) {
             // send an ajax-request to this URL: current-server.com/songs/ajaxGetStats
             // "url" is defined in views/_templates/footer.php
             $.ajax({
@@ -199,6 +202,7 @@ $('#btn_Add_TipoN').on('click', function(){
             .always(function() {
                     // this will ALWAYS be executed, regardless if the ajax-call was success or not
                 });
+            };
         });
 }
 
@@ -212,7 +216,7 @@ if ($('#btn_Add_Proceso').length !== 0) {
         Estado = $("#TxtEstadoProce").val();
       
 
-
+            if (validarFormulario()) {
             // send an ajax-request to this URL: current-server.com/songs/ajaxGetStats
             $.ajax({
                 type: "POST",
@@ -240,6 +244,7 @@ if ($('#btn_Add_Proceso').length !== 0) {
             .always(function() {
                     // this will ALWAYS be executed, regardless if the ajax-call was success or not
                 });
+            };
         });
 }
 
@@ -257,7 +262,7 @@ if ($('#btn_Add_TipoCli').length !== 0) {
         Estado = $("#TxtEstado").val();
       
 
-
+            if (validarFormulario()) {
             // send an ajax-request to this URL: current-server.com/songs/ajaxGetStats
             $.ajax({
                 type: "POST",
@@ -284,6 +289,7 @@ if ($('#btn_Add_TipoCli').length !== 0) {
             .always(function() {
                     // this will ALWAYS be executed, regardless if the ajax-call was success or not   
                 });
+            };
         });
 }
 
@@ -296,7 +302,8 @@ if ($('#btn_Add_TipoCli').length !== 0) {
             Nombrerequisito = $("#textNombrerequisito").val();
             Opcional = document.getElementById("CkOpcional").checked;
 
-            alert(Opcional);
+                
+                if (validarFormulario()) {
 
                 // send an ajax-request to this URL: current-server.com/songs/ajaxGetStats
                 $.ajax({
@@ -317,6 +324,7 @@ if ($('#btn_Add_TipoCli').length !== 0) {
                 .always(function() {
                         // this will ALWAYS be executed, regardless if the ajax-call was success or not   
                     });
+                };
             });
     }
 
@@ -812,7 +820,7 @@ if ($('#btn_Add_Legislacion').length !== 0) {
 
       
 
-
+            if (validarFormulario()) {
             // send an ajax-request to this URL: current-server.com/songs/ajaxGetStats
             $.ajax({
                 type: "POST",
@@ -838,9 +846,9 @@ if ($('#btn_Add_Legislacion').length !== 0) {
             .always(function() {
                     // this will ALWAYS be executed, regardless if the ajax-call was success or not   
                 });
+            };
         });
 }
-
 
 
 });

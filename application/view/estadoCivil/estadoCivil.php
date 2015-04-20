@@ -13,7 +13,12 @@
 		width: 400px;
 	}
 </style>
-<div class="span7 center" align="center">
+
+	
+	
+
+<div> 
+	<div class="span7il center" align="center" >
 	<table>
 		<tr>
 		<td><label for="">Codigo Estado Civil</label></td>
@@ -26,6 +31,7 @@
 	</tr>
 	</table>
 	<button type="submit" class="btn btn-material-grey-500" style="display:none;"data-dismiss="modal" id="btn_Update_EC"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Actualizar</button><button id="btn_Add_EC" type="submit" data-dismiss="modal" class="btn btn-material-red-800"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Guardar</button>
+</div>
 </div>
 
 

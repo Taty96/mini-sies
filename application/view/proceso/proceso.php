@@ -13,28 +13,53 @@
 		width: 400px;
 	}
 </style>
-<div class="span7 center" align="center">
+
+<script>
+window.onload = function () {
+document.formularioinfo.TxtDocumento.focus();
+document.formularioinfo.addEventListener('submit', validarFormulario);
+}
+ 
+function validarFormulario() {
+
+var todoCorrecto = true;
+var formulario = document.formularioinfo;
+for (var i=0; i<formulario.length; i++) {
+                if(formulario[i].type =='text') {
+                               if (formulario[i].value == null || formulario[i].value.length == 0 || /^\s*$/.test(formulario[i].value)){
+                               alertify.alert(formulario[i].name+ ' <h4>No puede estar vacío o contener sólo espacios en blanco</h4>');
+                               todoCorrecto=false;
+                               }
+                }
+                }
+return todoCorrecto;
+}
+</script>
+
+<form  name="formularioinfo">
+	<div class="span7 center" align="center" >
 	<table>
 	<tr>
 		<td><label for="">Codigo Proceso</label></td>
-		<td class="td"><input type="text" id="TxtCodigoProce"class="form-control" placeholder="Descripcion del proceso"></td>
+		<td class="td"><input type="text" id="TxtCodigoProce"class="form-control" placeholder="Descripcion del proceso" required tabindex="1"></td>
 	</tr>
 
 	<tr>
 		<td><label for="">Descripcion del proceso</label></td>
-		<td class="td"><input type="text" id="TxtDescriProce"class="form-control" placeholder="Descripcion del proceso"></td>
+		<td class="td"><input type="text" maxlength="10" onkeyup="return ismaxlengt(this)" id="TxtDescriProce"class="form-control" placeholder="Descripcion del proceso" required tabindex="2"></td>
 	</tr>
 	<tr>
 		<td><label for="">Nombre del proceso</label></td>
-		<td class="td"><input type="text" id="TxtNombreProce"class="form-control" placeholder="Nombre del proceso"></td>
+		<td class="td"><input type="text" maxlength="10" onkeyup="return ismaxlengt(this)" id="TxtNombreProce"class="form-control" placeholder="Nombre del proceso" required tabindex="3"></td>
 	</tr>
 	<tr>
 		<td><label for="">Estado del proceso</label></td>
-		<td class="td"><input type="text" id="TxtEstadoProce"class="form-control" placeholder="Estado del proceso"></td>
+		<td class="td"><input type="text" maxlength="10" onkeyup="return ismaxlengt(this)" id="TxtEstadoProce"class="form-control" placeholder="Estado del proceso" required tabindex="4"></td>
 	</tr>
 	</table>
-	<button type="submit" class="btn btn-material-grey-500" style="display:none;"data-dismiss="modal" id="btn_Update_Proceso"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Actualizar</button><button id="btn_Add_Proceso" type="submit" data-dismiss="modal" class="btn btn-material-red-800"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>      Guardar</button>
+	<button type="submit" class="btn btn-material-grey-500" style="display:none;"data-dismiss="modal" tabindex="6" id="btn_Update_Proceso"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Actualizar</button><button tabindex="5" id="btn_Add_Proceso" type="submit" data-dismiss="modal" class="btn btn-material-red-800"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>      Guardar</button>
 </div>
+</form>
 
 <div class="span6" id="div1">
 
