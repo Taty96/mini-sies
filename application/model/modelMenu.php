@@ -31,4 +31,12 @@
 			$query->execute();
 			return $query->fetchAll();
 		}
+		public function listarRol($id)
+		{
+			$sql = "call SpListarRol(?);";
+			$query = $this->db->prepare($sql);
+			$query->bindValue(1, $id, PDO::PARAM_INT);
+			$query->execute();
+			return $query->fetchAll();
+		}
 	}

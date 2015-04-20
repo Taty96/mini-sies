@@ -2,3 +2,8 @@
 # But, for fallback reasons (if you don't route your vhost to /public), it will stay here.
 RewriteEngine on
 RewriteRule ^(.*) public/$1 [L]
+
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^page/(.*)/$ /page.php?url=$1 [L]

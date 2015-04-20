@@ -10,19 +10,15 @@
  */
 class requisito extends Controller
 {
-    function __construct(){
-        parent::__construct("ModelRequisito");
-    }
+    /**
+     * PAGE: index
+     * This method handles the error page that will be shown when a page is not found
+     */
     public function index()
     {
         // load views
         require APP . 'view/_templates/header.php';
         require APP . 'view/requisito/requisito.php';
         require APP . 'view/_templates/footer.php';
-    }
-
-      public function addRequisito(){
-      $this->model->addRequisito($_POST['textNombrerequisito'],$_POST['CkOpcional']);
-
     }
 }

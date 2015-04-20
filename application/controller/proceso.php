@@ -10,33 +10,15 @@
  */
 class proceso extends Controller
 {
-    function __construct(){
-        parent::__construct("ModelProceso");
-    }
+    /**
+     * PAGE: index
+     * This method handles the error page that will be shown when a page is not found
+     */
     public function index()
     {
-         $Proceso = $this->model->getProceso();
+        // load views
         require APP . 'view/_templates/header.php';
         require APP . 'view/proceso/proceso.php';
         require APP . 'view/_templates/footer.php';
     }
-    public function addProcesos(){
-$this->model->addProcesos($_POST['TxtDescriProce'],$_POST['TxtNombreProce'],$_POST['TxtEstadoProce']);
-
-    }
-
-     public function UpdateProcesos()
-    {
-    $this->model->UpdateProcesos($_POST['TxtCodigoProce'],$_POST['TxtDescriProce'],$_POST['TxtNombreProce'],$_POST['TxtEstadoProce']);
-    }
-
-       public function deleteProceso($IdProceso)
-    {
-        if (isset($IdProceso)) {
-            $this->model->deleteProceso($IdProceso);
-        }
-        header('location: ' . URL . 'proceso');
-    }
-
-
 }
