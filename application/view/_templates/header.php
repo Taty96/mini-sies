@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>SIES</title>
+    <title>MINI</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -17,15 +17,18 @@
     <link href="<?php echo URL; ?>material/dist/css/roboto.min.css" rel="stylesheet">
     <link href="<?php echo URL; ?>material/dist/css/material-fullpalette.min.css" rel="stylesheet">
     <link href="<?php echo URL; ?>material/dist/css/ripples.min.css" rel="stylesheet">
+    <link href="<?php echo URL; ?>css/alertify.css" rel="stylesheet">
+     <link href="<?php echo URL; ?>css/boostrap.css" rel="stylesheet">
+ 
+    <script src="<?php echo URL; ?>js/alertify.js" type="text/javascript" charset="utf-8" async defer></script>
 
     <!-- Dropdown.js -->
     <link href="//cdn.rawgit.com/FezVrasta/dropdown.js/master/jquery.dropdown.css" rel="stylesheet">
     <link href="<?php echo URL; ?>css/style.css" rel="stylesheet">
-    <style>
-        body
-        {
-            background-color: white;
-        }
-    </style>
+
+    <link rel="stylesheet" type="text/css" href="<?php echo URL; ?>css/normalize.css" />
+        <link rel="stylesheet" type="text/css" href="<?php echo URL; ?>css/demo.css" />
+        <link rel="stylesheet" type="text/css" href="<?php echo URL; ?>css/component.css" />
+    
 </head>
 <body>

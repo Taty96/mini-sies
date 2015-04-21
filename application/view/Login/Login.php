@@ -18,7 +18,7 @@
 		<table>
 		<tr>
 			<td><label for="">Documento de identidad</label></td>
-			<td class="td"><input maxlength="11" type="number" pattern="[0-9]" class="form-control form-control-success" name="user" placeholder="Documento de identidad" title="Ingresa un documento correcto" required ></td>
+			<td class="td"><input maxlength="20" type="number" pattern="[0-9]" class="form-control form-control-success" name="user" placeholder="Documento de identidad" title="Ingresa un documento correcto" required ></td>
 		</tr>
 		<tr>
 			<td><label for="">Contraseña</label></td>
@@ -59,7 +59,7 @@
     <div class="modal-body">
     <form method="POST" action="<?php echo URL; ?>Login/SendMail">
     	<br>
-    	<input type="email" name="correo" required class="form-control form-control-success" placeholder="Correo Eletrónico">
+    	<input type="text" name="correo" required class="form-control form-control-success" placeholder="Correo Eletrónico">
     </div>
     <div class="modal-footer">
       <input name="btnCrear" type="button" onclick="this.form.submit();" class="btn btn-primary" value="Continuar"/>
