@@ -41,11 +41,6 @@ return todoCorrecto;
 	<div class="span7 center" align="center" >
 	<table>
 	<tr>
-		<td><label for="">Codigo Cliente</label></td>
-		<td class="td"><input type="text" class="form-control" id="TxtCodigoTC"placeholder="Tipo de Cliente" required tabindex="1" ></td>
-
-	</tr>
-	<tr>
 		<td><label for="">Nombre </label></td>
 		<td class="td"><input type="text" class="form-control" maxlength="12" onkeyup="return ismaxlengt(this)" id="TxtNombre"placeholder="Nombre " required tabindex="2" ></td>
 	</tr>
@@ -62,7 +57,6 @@ return todoCorrecto;
 	<table class="table table-hover" id="FondoT">
 		<thead>
 			<tr class="tabla" border="1" bordercolor="#FFFFFF" cellpadding="20">
-				<th>Codigo Cliente</th>
 				<th>Nombre</th>
 				<th>Estado</th>				
 				<th>Acciones</th>
@@ -72,8 +66,7 @@ return todoCorrecto;
 		<tbody>
 		
 		<?php foreach ($tipoCliente as $value) {?>
-			<tr>
-				<td><?php echo $value->IdTipoCliente; ?></td>			
+			<tr>		
 				<td><?php echo $value->Nombre; ?></td>
 				<td><?php echo $value->Estado; ?></td>
 				<td><button class="btn btn-fab btn-raised btn-material-teal-300" onclick=" return ActualizarTipoCliente(this);"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>

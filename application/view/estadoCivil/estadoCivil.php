@@ -49,14 +49,9 @@
 		} 
 </script>
 </head>
-<form>
+
 	 	<div class="span7 center" align="center">
 	<table>
-		<tr>
-		<td><label for="">Codigo Estado Civil</label></td>
-		<td class="td"><input type="text" readonly="readonly" id="TxtCEC"class="form-control" placeholder="Codigo Estado Civil"></td>
-	</tr>
-
 	<tr>
 		<td><label for="">Nombre Estado Civil</label></td>
 		<td class="td"><input type="text" name="texto" id="TxtNombre" class="form-control" placeholder="Nombre Estado Civil" onkeydown="return validarLetras(event)" onKeyUp="valida_longitud()"></td>
@@ -70,7 +65,6 @@
 		<thead>
 			
 			<tr class="tabla" border="1" bordercolor="#FFFFFF" cellpadding="20">
-				<th>Codigo Estado Civil</th>
 				<th>Nombre Estado Civil</th>
 				<th>Acciones</th>
 			</tr>
@@ -80,7 +74,6 @@
 		
 		<?php foreach ($EstadoCivil as $value) {?>
 			<tr>
-				<td><?php echo $value->IdEstado_Civil; ?></td>
 				<td><?php echo $value->Nombre; ?></td>
 			    <td><button class="btn btn-fab btn-raised btn-material-teal-300" onclick="return ActualizarEC(this);"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
 				<a class="btn btn-fab btn-raised btn-material-teal-700"  href="<?php echo URL . 'EstadoCivil/deleteEstadoCivil/' . htmlspecialchars($value->IdEstado_Civil, ENT_QUOTES, 'UTF-8'); ?>"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
@@ -92,4 +85,4 @@
 		</tbody>
 	</table>
 </div>
-</form>
+

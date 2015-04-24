@@ -16,11 +16,6 @@
 <div class="span7 center" align="center">
 	<table>
 	<tr>
-		<td><label for="">Id Genero</label></td>
-		<td class="td"><input type="text" id ="TxtidGene" class="form-control"  readonly="readonly" placeholder="Nombre del genero"></td>
-	</tr>
-
-	<tr>
 		<td><label for="">Nombre del genero</label></td>
 		<td class="td"><input type="text" id ="TxtNombreGenero" class="form-control" placeholder="Nombre del genero"></td>
 	</tr>
@@ -34,7 +29,6 @@
 	<table class="table table-hover" id="FondoT">
 		<thead>
 			<tr class="tabla" border="1" bordercolor="#FFFFFF" cellpadding="20">
-				<th>Id genero</th>
 				<th>Nombre</th>
 				<th>Acciones</th>
 			</tr>
@@ -44,7 +38,6 @@
 		
 		<?php foreach ($tiposGenero as $value) {?>
 			<tr>
-				<td><?php echo $value->IdGenero; ?></td>
 				<td><?php echo $value->Nombre; ?></td>
 				<td><button class="btn btn-fab btn-raised btn-material-teal-300" onclick="ActualizarGenero(this);"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
 				<a class="btn btn-fab btn-raised btn-material-teal-700"  href="<?php echo URL . 'genero/deleteGenero/' . htmlspecialchars($value->IdGenero, ENT_QUOTES, 'UTF-8'); ?>"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>

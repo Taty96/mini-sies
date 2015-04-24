@@ -10,7 +10,7 @@ class ModelestadoCivil{
 	}
 	public function addEstadoCivil($Nombre)
 	{
-		$sql = "CALL SpInsertarEstadoCivil(?)";
+		$sql = "CALL insertarestadocivil(?)";
 		$query = $this->db->prepare($sql);
 		$query->bindValue(1, $Nombre, PDO::PARAM_STR);	
 		$query->execute();

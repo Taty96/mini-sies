@@ -42,10 +42,6 @@ return todoCorrecto;
 <form name="formularioinfo">
 	<div class="span7 center" align="center">
 	<table>
-	<tr>
-		<td><label for="">Codigo de la legislación</label></td>
-		<td class="td"><input type="text" class="form-control" id="TxtCodigoLegislacion"placeholder="Nombre de la legislación" required ></td>
-	</tr>
 
 	<tr>
 		<td><label for="">Descripcion de la legislación</label></td>
@@ -69,7 +65,7 @@ return todoCorrecto;
 	<table class="table table-hover" id="FondoT">
 		<thead>
 			<tr class="tabla" border="1" bordercolor="#FFFFFF" cellpadding="20">
-				<th>Codigo Legislacion</th>
+
 				<th>Nombre</th>
 				<th>Descripcion</th>
 				<th>Estado</th>
@@ -81,7 +77,6 @@ return todoCorrecto;
 		
 		<?php foreach ($legislacion as $value) {?>
 			<tr>
-				<td><?php echo $value->IdLegislacion; ?></td>
 				<td><?php echo $value->Nombre; ?></td>
 				<td><?php echo $value->Descripcion; ?></td>
 				<td><?php echo $value->Estado; ?></td>

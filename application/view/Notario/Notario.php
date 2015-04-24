@@ -58,10 +58,7 @@
 
 	<div class="span7 center" align="center" >
 	<table>
-    <tr>
-		<td><label for="">Codigo Notario</label></td>
-		<td class="td"><input type="text" readonly="readonly" id="TxtCN" class="form-control" placeholder="Codigo Notario"></td>
-	</tr>
+
 	<tr>
 		<td><label for="">Nombre del notario</label></td>
 		<td class="td"><input type="text" id="TxtNombre" class="form-control" placeholder="Nombre Notario" onkeydown="return validarLetras(event)" onKeyUp="valida_longitud()"></td>
@@ -108,7 +105,7 @@
 	<table>
 		<thead>
 			<tr>
-				<th>Codigo Notario</th>
+
 				<th>Nombre Notario</th>
 				<th>Fecha Inicio</th>
 				<th>Fecha Fin</th>
@@ -122,7 +119,6 @@
 		
 		<?php foreach ($Notario as $value) {?>
 			<tr>
-				<td><?php echo $value->IdNotario; ?></td>
 				<td><?php echo $value->Nombre; ?></td>
 				<td><?php echo $value->FechaInicio; ?></td>
 				<td><?php echo $value->FechaFin; ?></td>

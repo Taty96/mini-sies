@@ -79,7 +79,6 @@ obj.value=obj.value.substring(0,mlength)
 	<table class="table table-hover" id="FondoT">
 		<thead>
 			<tr class="tabla" border="1" bordercolor="#FFFFFF" cellpadding="20">
-				<th>Tipo Empleado</th>
 				<th>Nivel de acceso</th>
 				<th>Nombre</th>
 				<th>Estado</th>
@@ -91,7 +90,6 @@ obj.value=obj.value.substring(0,mlength)
 		
 		<?php foreach ($tiposEmpleado as $value) {?>
 			<tr>
-				<td><?php echo $value->IdTipoEmpleado; ?></td>
 				<td><?php echo $value->NivelAcceso; ?></td>
 				<td><?php echo $value->Nombre; ?></td>
 				<td><?php echo $value->Estado; ?></td>

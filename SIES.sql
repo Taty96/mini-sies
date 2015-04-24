@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.2.11
+-- version 4.1.12
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-04-2015 a las 16:09:39
--- Versión del servidor: 5.6.21
--- Versión de PHP: 5.6.3
+-- Tiempo de generación: 25-04-2015 a las 00:04:35
+-- Versión del servidor: 5.6.16
+-- Versión de PHP: 5.5.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,18 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de datos: `mydb`
+-- Base de datos: `sies`
 --
 
 DELIMITER $$
 --
 -- Procedimientos
 --
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarestadocivil`(IN `nombre` VARCHAR(15))
+Begin
+insert into tbl_estadocivil(Nombre) values(nombre);
+End$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SpActualizarEstadoCivil`(IN `id` INT, IN `nombre` VARCHAR(15))
     NO SQL
 Begin
@@ -251,12 +256,6 @@ end$$
 CREATE DEFINER=`localhost`@`root` PROCEDURE `SpGetMenu`(IN `_rol` INT)
 select innerHTML from tbl_menu where idobjeto in (select idmenu from tbl_menurol where idrol = _rol)$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SpInsertarEstadoCivil`(IN `Id` INT, IN `nombre` VARCHAR(15))
-    NO SQL
-Begin
-insert into tbl_estadocivil(IdEstado_Civil,Nombre) values(Id,nombre);
-End$$
-
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SpInsertarGenero`(IN `Nombre` VARCHAR(15))
 begin 
  
@@ -266,7 +265,6 @@ insert into tbl_genero (Nombre)values (Nombre);
 end$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SpInsertarLegislacion`(IN `Nombre` VARCHAR(35), IN `Descripcion` VARCHAR(35), IN `Estado` INT)
-    NO SQL
 BEGIN
 	INSERT INTO tbl_legislacion (Nombre,Descripcion,Estado) VALUES (Nombre,Descripcion,Estado);
 END$$
@@ -305,9 +303,9 @@ BEGIN
 	INSERT INTO tbl_tipoempleado (NivelAcceso,Nombre,Estado) VALUES (NivelAcceso,Nombre,Estado);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SpInsertarTipoDocumento`(IN `Descripcion` VARCHAR(15))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SpInsertarTipoDocumento`(IN `Nombre` VARCHAR(15), IN `Sufijo` VARCHAR(15))
 begin
-insert into tbl_tipodocumento(Descripcion) values (Descripcion);
+insert into tbl_tipodocumento(Nombre,Sufijo) values (Nombre,Sufijo);
 
 end$$
 
@@ -356,7 +354,7 @@ SELECT `IdEstado_Civil`, `Nombre` FROM `tbl_estadocivil`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SpListarGenero`()
 SELECT `IdGenero`, `Nombre` FROM `tbl_genero`$$
 
-CREATE DEFINER=`localhost`@`root` PROCEDURE `SpListarLegislacion`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SpListarLegislacion`()
 SELECT `IdLegislacion`, `Nombre`, `Descripcion`, `Estado` FROM `tbl_legislacion`$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SpListarNotario`()
@@ -369,7 +367,7 @@ SELECT `IdParagrafo`, `Nombre`, `Descripcion` FROM `tbl_paragrafo`$$
 CREATE DEFINER=`localhost`@`root` PROCEDURE `SpListarPlantilla`()
 SELECT `IdPlantilla`, `Descripcion`, `Nombre`, `Url_Plantilla`, `Estado`, `Version`, `FK_TipoEscritura`, `tbl_tipoescritura_IdTipo_Escritura` FROM `tbl_plantilla`$$
 
-CREATE DEFINER=`localhost`@`root` PROCEDURE `SpListarProceso`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SpListarProceso`()
 SELECT `IdProceso`, `Descripcion`, `Nombre`, `Estado` FROM `tbl_proceso`$$
 
 CREATE DEFINER=`localhost`@`root` PROCEDURE `SpListarRequisitos`()
@@ -379,10 +377,10 @@ SELECT `IdRequisito`, `NombreDocumento`, `Opcional` FROM `tbl_requisito`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SpListarRol`(IN `IdEmp` INT)
 select r.id_rol, e.Nombre from tbl_empleadorol r inner join tbl_tipoempleado e on (r.id_rol = e.idtipo_usuario) where r.id_empleado = IdEmp$$
 
-CREATE DEFINER=`localhost`@`root` PROCEDURE `SpListarTipoCliente`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SpListarTipoCliente`()
 SELECT `IdTipoCliente`, `Nombre`, `Estado` FROM `tbl_tipo_cliente`$$
 
-CREATE DEFINER=`localhost`@`root` PROCEDURE `SpListarTipoDocumento`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SpListarTipoDocumento`()
 SELECT `IdTipoDocumento`, `Nombre`, `Sufijo` FROM `tbl_tipodocumento`$$
 
 CREATE DEFINER=`localhost`@`root` PROCEDURE `SpListarTipoEmplado`()
@@ -398,8 +396,8 @@ SELECT `IdTipo_Escritura`, `Nombre`, `FK_Clausula`, `tbl_clausula_IdClausula` FR
 CREATE DEFINER=`localhost`@`root` PROCEDURE `SpListarTipoescrituraLegislaion`()
 SELECT `IdTipoEscritura_Legislacion`, `FK_Legislacion`, `FK_TipoEscritura`, `tbl_legislacion_IdLegislacion`, `tbl_tipoescritura_IdTipo_Escritura` FROM `tbl_tipoescritura_legislacion`$$
 
-CREATE DEFINER=`localhost`@`root` PROCEDURE `SpListarTipoNotario`()
-SELECT `idTipo_notario`, `tipo notario`, `Estado` FROM `tipo_notario`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SpListarTipoNotario`()
+SELECT `idTipo_notario`, `tipo_notario`, `Estado` FROM `tipo_notario`$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SpLogin`(IN `_user` VARCHAR(20), IN `_pass` VARCHAR(20))
 SELECT * FROM tbl_empleado WHERE CC = _user AND pass = _pass$$
@@ -419,10 +417,12 @@ DELIMITER ;
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_bitacora` (
-`IdBitacora` int(11) NOT NULL,
+  `IdBitacora` int(11) NOT NULL AUTO_INCREMENT,
   `Fecha_Bitacora` datetime DEFAULT NULL,
-  `tbl_escritura_IdEscritura` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `tbl_escritura_IdEscritura` int(11) NOT NULL,
+  PRIMARY KEY (`IdBitacora`),
+  KEY `fk_tbl_bitacora_tbl_escritura1_idx` (`tbl_escritura_IdEscritura`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -431,11 +431,13 @@ CREATE TABLE IF NOT EXISTS `tbl_bitacora` (
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_clausula` (
-`IdClausula` int(11) NOT NULL,
+  `IdClausula` int(11) NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Descripcion` varchar(400) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `tbl_paragrafo_IdParagrafo` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `tbl_paragrafo_IdParagrafo` int(11) NOT NULL,
+  PRIMARY KEY (`IdClausula`),
+  KEY `fk_tbl_clausula_tbl_paragrafo1_idx` (`tbl_paragrafo_IdParagrafo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -444,7 +446,7 @@ CREATE TABLE IF NOT EXISTS `tbl_clausula` (
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_cliente` (
-`Numero_Documento` int(11) NOT NULL,
+  `Numero_Documento` int(11) NOT NULL AUTO_INCREMENT,
   `Nombre1` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Nombre2` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Apellido1` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -453,8 +455,13 @@ CREATE TABLE IF NOT EXISTS `tbl_cliente` (
   `tbl_estadocivil_IdEstado_Civil` int(11) NOT NULL,
   `tbl_tipodocumento_IdDocumento` int(11) NOT NULL,
   `tbl_genero_IdGenero` int(11) NOT NULL,
-  `tbl_tipo_cliente_IdTipoCliente` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `tbl_tipo_cliente_IdTipoCliente` int(11) NOT NULL,
+  PRIMARY KEY (`Numero_Documento`),
+  KEY `fk_tbl_cliente_tbl_estadocivil1_idx` (`tbl_estadocivil_IdEstado_Civil`),
+  KEY `fk_tbl_cliente_tbl_tipodocumento1_idx` (`tbl_tipodocumento_IdDocumento`),
+  KEY `fk_tbl_cliente_tbl_genero1_idx` (`tbl_genero_IdGenero`),
+  KEY `fk_tbl_cliente_tbl_tipo_cliente1_idx` (`tbl_tipo_cliente_IdTipoCliente`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -463,12 +470,15 @@ CREATE TABLE IF NOT EXISTS `tbl_cliente` (
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_detalle_bitacora` (
-`IdDetalle` int(11) NOT NULL,
+  `IdDetalle` int(11) NOT NULL AUTO_INCREMENT,
   `Observacion` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `FechaLimite` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `tbl_proceso_IdProceso` int(11) NOT NULL,
-  `tbl_bitacora_IdBitacora` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `tbl_bitacora_IdBitacora` int(11) NOT NULL,
+  PRIMARY KEY (`IdDetalle`),
+  KEY `fk_tbl_detalle_bitacora_tbl_proceso1_idx` (`tbl_proceso_IdProceso`),
+  KEY `fk_tbl_detalle_bitacora_tbl_bitacora1_idx` (`tbl_bitacora_IdBitacora`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -477,7 +487,7 @@ CREATE TABLE IF NOT EXISTS `tbl_detalle_bitacora` (
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_empleado` (
-`Numero_Documento` int(11) NOT NULL,
+  `Numero_Documento` int(11) NOT NULL AUTO_INCREMENT,
   `Nombre1` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Nombre2` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Apellido` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -488,8 +498,12 @@ CREATE TABLE IF NOT EXISTS `tbl_empleado` (
   `tbl_tipoempleado_IdTipo_Usuario` int(11) NOT NULL,
   `tbl_tipodocumento_IdTipoDocumento` int(11) NOT NULL,
   `pass` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `correo` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `correo` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`Numero_Documento`),
+  KEY `fk_tbl_empleado_tbl_genero1_idx` (`tbl_genero_IdGenero`),
+  KEY `fk_tbl_empleado_tbl_tipoempleado1_idx` (`tbl_tipoempleado_IdTipo_Usuario`),
+  KEY `fk_tbl_empleado_tbl_tipodocumento1_idx` (`tbl_tipodocumento_IdTipoDocumento`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -517,13 +531,17 @@ INSERT INTO `tbl_empleadorol` (`id_empleado`, `id_rol`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_escritura` (
-`IdEscritura` int(11) NOT NULL,
+  `IdEscritura` int(11) NOT NULL AUTO_INCREMENT,
   `Descripcion` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Estado` int(11) DEFAULT NULL,
   `tbl_plantilla_IdPlantilla` int(11) NOT NULL,
   `tbl_tipoescritura_IdTipo_Escritura` int(11) NOT NULL,
-  `tbl_notario_IdNotario` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `tbl_notario_IdNotario` int(11) NOT NULL,
+  PRIMARY KEY (`IdEscritura`),
+  KEY `fk_tbl_escritura_tbl_plantilla1_idx` (`tbl_plantilla_IdPlantilla`),
+  KEY `fk_tbl_escritura_tbl_tipoescritura1_idx` (`tbl_tipoescritura_IdTipo_Escritura`),
+  KEY `fk_tbl_escritura_tbl_notario1_idx` (`tbl_notario_IdNotario`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -532,10 +550,13 @@ CREATE TABLE IF NOT EXISTS `tbl_escritura` (
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_escritura_cliente` (
-`Id_Escritura_Cliente` int(11) NOT NULL,
+  `Id_Escritura_Cliente` int(11) NOT NULL AUTO_INCREMENT,
   `tbl_escritura_IdEscritura` int(11) NOT NULL,
-  `tbl_cliente_Numero_Documento` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `tbl_cliente_Numero_Documento` int(11) NOT NULL,
+  PRIMARY KEY (`Id_Escritura_Cliente`),
+  KEY `fk_tbl_escritura_cliente_tbl_escritura1_idx` (`tbl_escritura_IdEscritura`),
+  KEY `fk_tbl_escritura_cliente_tbl_cliente1_idx` (`tbl_cliente_Numero_Documento`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -544,10 +565,13 @@ CREATE TABLE IF NOT EXISTS `tbl_escritura_cliente` (
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_escritura_has_tbl_empleado` (
-`Id_Escritura_Empleado` int(11) NOT NULL,
+  `Id_Escritura_Empleado` int(11) NOT NULL AUTO_INCREMENT,
   `tbl_escritura_IdEscritura` int(11) NOT NULL,
-  `tbl_empleado_Numero_Documento` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `tbl_empleado_Numero_Documento` int(11) NOT NULL,
+  PRIMARY KEY (`Id_Escritura_Empleado`),
+  KEY `fk_tbl_escritura_has_tbl_empleado_tbl_escritura1_idx` (`tbl_escritura_IdEscritura`),
+  KEY `fk_tbl_escritura_has_tbl_empleado_tbl_empleado1_idx` (`tbl_empleado_Numero_Documento`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -556,10 +580,13 @@ CREATE TABLE IF NOT EXISTS `tbl_escritura_has_tbl_empleado` (
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_escritura_requisito` (
-`Id_Escritura_Requisito` int(11) NOT NULL,
+  `Id_Escritura_Requisito` int(11) NOT NULL AUTO_INCREMENT,
   `tbl_requisito_IdRequisito` int(11) NOT NULL,
-  `tbl_escritura_IdEscritura` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `tbl_escritura_IdEscritura` int(11) NOT NULL,
+  PRIMARY KEY (`Id_Escritura_Requisito`),
+  KEY `fk_tbl_escritura_requisito_tbl_requisito1_idx` (`tbl_requisito_IdRequisito`),
+  KEY `fk_tbl_escritura_requisito_tbl_escritura1_idx` (`tbl_escritura_IdEscritura`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -568,9 +595,17 @@ CREATE TABLE IF NOT EXISTS `tbl_escritura_requisito` (
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_estadocivil` (
-`IdEstado_Civil` int(11) NOT NULL,
-  `Nombre` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `IdEstado_Civil` int(11) NOT NULL AUTO_INCREMENT,
+  `Nombre` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`IdEstado_Civil`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+
+--
+-- Volcado de datos para la tabla `tbl_estadocivil`
+--
+
+INSERT INTO `tbl_estadocivil` (`IdEstado_Civil`, `Nombre`) VALUES
+(4, 'kjk');
 
 -- --------------------------------------------------------
 
@@ -579,9 +614,17 @@ CREATE TABLE IF NOT EXISTS `tbl_estadocivil` (
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_genero` (
-`IdGenero` int(11) NOT NULL,
-  `Nombre` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `IdGenero` int(11) NOT NULL AUTO_INCREMENT,
+  `Nombre` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`IdGenero`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
+--
+-- Volcado de datos para la tabla `tbl_genero`
+--
+
+INSERT INTO `tbl_genero` (`IdGenero`, `Nombre`) VALUES
+(1, 'bn');
 
 -- --------------------------------------------------------
 
@@ -590,11 +633,19 @@ CREATE TABLE IF NOT EXISTS `tbl_genero` (
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_legislacion` (
-`IdLegislacion` int(11) NOT NULL,
+  `IdLegislacion` int(11) NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Descripcion` varchar(400) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Estado` varchar(35) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `Estado` varchar(35) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`IdLegislacion`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
+--
+-- Volcado de datos para la tabla `tbl_legislacion`
+--
+
+INSERT INTO `tbl_legislacion` (`IdLegislacion`, `Nombre`, `Descripcion`, `Estado`) VALUES
+(1, 'ftghfg', 'gfh', '4');
 
 -- --------------------------------------------------------
 
@@ -643,7 +694,7 @@ INSERT INTO `tbl_menurol` (`IdMenu`, `IdRol`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_notario` (
-`IdNotario` int(11) NOT NULL,
+  `IdNotario` int(11) NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `FechaInicio` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `FechaFin` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -651,8 +702,17 @@ CREATE TABLE IF NOT EXISTS `tbl_notario` (
   `Estado` int(11) DEFAULT NULL,
   `Tipo_notario_idTipo_notario` int(11) NOT NULL,
   `Correo` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Password` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `Password` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`IdNotario`),
+  KEY `fk_tbl_notario_Tipo_notario1_idx` (`Tipo_notario_idTipo_notario`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+
+--
+-- Volcado de datos para la tabla `tbl_notario`
+--
+
+INSERT INTO `tbl_notario` (`IdNotario`, `Nombre`, `FechaInicio`, `FechaFin`, `NombreNotaria`, `Estado`, `Tipo_notario_idTipo_notario`, `Correo`, `Password`) VALUES
+(2, 'mn', '2015-04-05', '2015-04-04', 'as', 1, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -661,10 +721,18 @@ CREATE TABLE IF NOT EXISTS `tbl_notario` (
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_paragrafo` (
-`IdParagrafo` int(11) NOT NULL,
+  `IdParagrafo` int(11) NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Descripcion` varchar(400) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `Descripcion` varchar(400) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`IdParagrafo`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
+--
+-- Volcado de datos para la tabla `tbl_paragrafo`
+--
+
+INSERT INTO `tbl_paragrafo` (`IdParagrafo`, `Nombre`, `Descripcion`) VALUES
+(1, 'dd', 'dddd');
 
 -- --------------------------------------------------------
 
@@ -673,14 +741,16 @@ CREATE TABLE IF NOT EXISTS `tbl_paragrafo` (
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_plantilla` (
-`IdPlantilla` int(11) NOT NULL,
+  `IdPlantilla` int(11) NOT NULL AUTO_INCREMENT,
   `Descripcion` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Nombre` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Url_Plantilla` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Estado` int(11) DEFAULT NULL,
   `Version` int(11) DEFAULT NULL,
-  `tbl_tipoescritura_IdTipo_Escritura` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `tbl_tipoescritura_IdTipo_Escritura` int(11) NOT NULL,
+  PRIMARY KEY (`IdPlantilla`),
+  KEY `fk_tbl_plantilla_tbl_tipoescritura1_idx` (`tbl_tipoescritura_IdTipo_Escritura`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -689,11 +759,19 @@ CREATE TABLE IF NOT EXISTS `tbl_plantilla` (
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_proceso` (
-`IdProceso` int(11) NOT NULL,
+  `IdProceso` int(11) NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Descripcion` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Estado` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `Estado` int(11) DEFAULT NULL,
+  PRIMARY KEY (`IdProceso`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
+--
+-- Volcado de datos para la tabla `tbl_proceso`
+--
+
+INSERT INTO `tbl_proceso` (`IdProceso`, `Nombre`, `Descripcion`, `Estado`) VALUES
+(1, 'fdg', 'xcgvx', 3);
 
 -- --------------------------------------------------------
 
@@ -702,10 +780,11 @@ CREATE TABLE IF NOT EXISTS `tbl_proceso` (
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_requisito` (
-`IdRequisito` int(11) NOT NULL,
+  `IdRequisito` int(11) NOT NULL AUTO_INCREMENT,
   `NombreRequisito` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Opcional` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `Opcional` int(11) DEFAULT NULL,
+  PRIMARY KEY (`IdRequisito`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -714,10 +793,19 @@ CREATE TABLE IF NOT EXISTS `tbl_requisito` (
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_tipodocumento` (
-`IdTipoDocumento` int(11) NOT NULL,
+  `IdTipoDocumento` int(11) NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Sufijo` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `Sufijo` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`IdTipoDocumento`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+
+--
+-- Volcado de datos para la tabla `tbl_tipodocumento`
+--
+
+INSERT INTO `tbl_tipodocumento` (`IdTipoDocumento`, `Nombre`, `Sufijo`) VALUES
+(1, 'mn', 'cc'),
+(2, 'Mateo', 'TI');
 
 -- --------------------------------------------------------
 
@@ -726,12 +814,21 @@ CREATE TABLE IF NOT EXISTS `tbl_tipodocumento` (
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_tipoempleado` (
-`IdTipo_Usuario` int(11) NOT NULL,
+  `IdTipo_Empleado` int(11) NOT NULL AUTO_INCREMENT,
   `NivelAcceso` int(11) DEFAULT NULL,
   `Nombre` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Estado` int(11) DEFAULT NULL,
-  `menu` varchar(2000) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `menu` varchar(2000) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`IdTipo_Empleado`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+
+--
+-- Volcado de datos para la tabla `tbl_tipoempleado`
+--
+
+INSERT INTO `tbl_tipoempleado` (`IdTipo_Empleado`, `NivelAcceso`, `Nombre`, `Estado`, `menu`) VALUES
+(1, 1, 'mn', 2, NULL),
+(2, 2, 'Mateo', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -740,10 +837,12 @@ CREATE TABLE IF NOT EXISTS `tbl_tipoempleado` (
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_tipoescritura` (
-`IdTipo_Escritura` int(11) NOT NULL,
+  `IdTipo_Escritura` int(11) NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `tbl_clausula_IdClausula` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `tbl_clausula_IdClausula` int(11) NOT NULL,
+  PRIMARY KEY (`IdTipo_Escritura`),
+  KEY `fk_tbl_tipoescritura_tbl_clausula1_idx` (`tbl_clausula_IdClausula`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -752,10 +851,13 @@ CREATE TABLE IF NOT EXISTS `tbl_tipoescritura` (
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_tipoescritura_legislacion` (
-`IdTipoEscritura_Legislacion` int(11) NOT NULL,
+  `IdTipoEscritura_Legislacion` int(11) NOT NULL AUTO_INCREMENT,
   `tbl_legislacion_IdLegislacion` int(11) NOT NULL,
-  `tbl_tipoescritura_IdTipo_Escritura` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `tbl_tipoescritura_IdTipo_Escritura` int(11) NOT NULL,
+  PRIMARY KEY (`IdTipoEscritura_Legislacion`),
+  KEY `fk_tbl_tipoEscritura_legislacion_tbl_legislacion1_idx` (`tbl_legislacion_IdLegislacion`),
+  KEY `fk_tbl_tipoEscritura_legislacion_tbl_tipoescritura1_idx` (`tbl_tipoescritura_IdTipo_Escritura`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -764,10 +866,18 @@ CREATE TABLE IF NOT EXISTS `tbl_tipoescritura_legislacion` (
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_tipo_cliente` (
-`IdTipoCliente` int(11) NOT NULL,
+  `IdTipoCliente` int(11) NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(45) DEFAULT NULL,
-  `Estado` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `Estado` int(11) DEFAULT NULL,
+  PRIMARY KEY (`IdTipoCliente`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Volcado de datos para la tabla `tbl_tipo_cliente`
+--
+
+INSERT INTO `tbl_tipo_cliente` (`IdTipoCliente`, `Nombre`, `Estado`) VALUES
+(1, 'fdgd', 3);
 
 -- --------------------------------------------------------
 
@@ -776,272 +886,19 @@ CREATE TABLE IF NOT EXISTS `tbl_tipo_cliente` (
 --
 
 CREATE TABLE IF NOT EXISTS `tipo_notario` (
-`idTipo_notario` int(11) NOT NULL,
-  `tipo notario` varchar(45) DEFAULT NULL,
-  `Estado` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `idTipo_notario` int(11) NOT NULL AUTO_INCREMENT,
+  `tipo_notario` varchar(45) DEFAULT NULL,
+  `Estado` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idTipo_notario`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
--- Índices para tablas volcadas
+-- Volcado de datos para la tabla `tipo_notario`
 --
 
---
--- Indices de la tabla `tbl_bitacora`
---
-ALTER TABLE `tbl_bitacora`
- ADD PRIMARY KEY (`IdBitacora`), ADD KEY `fk_tbl_bitacora_tbl_escritura1_idx` (`tbl_escritura_IdEscritura`);
+INSERT INTO `tipo_notario` (`idTipo_notario`, `tipo_notario`, `Estado`) VALUES
+(1, 'vvvv', 1);
 
---
--- Indices de la tabla `tbl_clausula`
---
-ALTER TABLE `tbl_clausula`
- ADD PRIMARY KEY (`IdClausula`), ADD KEY `fk_tbl_clausula_tbl_paragrafo1_idx` (`tbl_paragrafo_IdParagrafo`);
-
---
--- Indices de la tabla `tbl_cliente`
---
-ALTER TABLE `tbl_cliente`
- ADD PRIMARY KEY (`Numero_Documento`), ADD KEY `fk_tbl_cliente_tbl_estadocivil1_idx` (`tbl_estadocivil_IdEstado_Civil`), ADD KEY `fk_tbl_cliente_tbl_tipodocumento1_idx` (`tbl_tipodocumento_IdDocumento`), ADD KEY `fk_tbl_cliente_tbl_genero1_idx` (`tbl_genero_IdGenero`), ADD KEY `fk_tbl_cliente_tbl_tipo_cliente1_idx` (`tbl_tipo_cliente_IdTipoCliente`);
-
---
--- Indices de la tabla `tbl_detalle_bitacora`
---
-ALTER TABLE `tbl_detalle_bitacora`
- ADD PRIMARY KEY (`IdDetalle`), ADD KEY `fk_tbl_detalle_bitacora_tbl_proceso1_idx` (`tbl_proceso_IdProceso`), ADD KEY `fk_tbl_detalle_bitacora_tbl_bitacora1_idx` (`tbl_bitacora_IdBitacora`);
-
---
--- Indices de la tabla `tbl_empleado`
---
-ALTER TABLE `tbl_empleado`
- ADD PRIMARY KEY (`Numero_Documento`), ADD KEY `fk_tbl_empleado_tbl_genero1_idx` (`tbl_genero_IdGenero`), ADD KEY `fk_tbl_empleado_tbl_tipoempleado1_idx` (`tbl_tipoempleado_IdTipo_Usuario`), ADD KEY `fk_tbl_empleado_tbl_tipodocumento1_idx` (`tbl_tipodocumento_IdTipoDocumento`);
-
---
--- Indices de la tabla `tbl_escritura`
---
-ALTER TABLE `tbl_escritura`
- ADD PRIMARY KEY (`IdEscritura`), ADD KEY `fk_tbl_escritura_tbl_plantilla1_idx` (`tbl_plantilla_IdPlantilla`), ADD KEY `fk_tbl_escritura_tbl_tipoescritura1_idx` (`tbl_tipoescritura_IdTipo_Escritura`), ADD KEY `fk_tbl_escritura_tbl_notario1_idx` (`tbl_notario_IdNotario`);
-
---
--- Indices de la tabla `tbl_escritura_cliente`
---
-ALTER TABLE `tbl_escritura_cliente`
- ADD PRIMARY KEY (`Id_Escritura_Cliente`), ADD KEY `fk_tbl_escritura_cliente_tbl_escritura1_idx` (`tbl_escritura_IdEscritura`), ADD KEY `fk_tbl_escritura_cliente_tbl_cliente1_idx` (`tbl_cliente_Numero_Documento`);
-
---
--- Indices de la tabla `tbl_escritura_has_tbl_empleado`
---
-ALTER TABLE `tbl_escritura_has_tbl_empleado`
- ADD PRIMARY KEY (`Id_Escritura_Empleado`), ADD KEY `fk_tbl_escritura_has_tbl_empleado_tbl_escritura1_idx` (`tbl_escritura_IdEscritura`), ADD KEY `fk_tbl_escritura_has_tbl_empleado_tbl_empleado1_idx` (`tbl_empleado_Numero_Documento`);
-
---
--- Indices de la tabla `tbl_escritura_requisito`
---
-ALTER TABLE `tbl_escritura_requisito`
- ADD PRIMARY KEY (`Id_Escritura_Requisito`), ADD KEY `fk_tbl_escritura_requisito_tbl_requisito1_idx` (`tbl_requisito_IdRequisito`), ADD KEY `fk_tbl_escritura_requisito_tbl_escritura1_idx` (`tbl_escritura_IdEscritura`);
-
---
--- Indices de la tabla `tbl_estadocivil`
---
-ALTER TABLE `tbl_estadocivil`
- ADD PRIMARY KEY (`IdEstado_Civil`);
-
---
--- Indices de la tabla `tbl_genero`
---
-ALTER TABLE `tbl_genero`
- ADD PRIMARY KEY (`IdGenero`);
-
---
--- Indices de la tabla `tbl_legislacion`
---
-ALTER TABLE `tbl_legislacion`
- ADD PRIMARY KEY (`IdLegislacion`);
-
---
--- Indices de la tabla `tbl_notario`
---
-ALTER TABLE `tbl_notario`
- ADD PRIMARY KEY (`IdNotario`), ADD KEY `fk_tbl_notario_Tipo_notario1_idx` (`Tipo_notario_idTipo_notario`);
-
---
--- Indices de la tabla `tbl_paragrafo`
---
-ALTER TABLE `tbl_paragrafo`
- ADD PRIMARY KEY (`IdParagrafo`);
-
---
--- Indices de la tabla `tbl_plantilla`
---
-ALTER TABLE `tbl_plantilla`
- ADD PRIMARY KEY (`IdPlantilla`), ADD KEY `fk_tbl_plantilla_tbl_tipoescritura1_idx` (`tbl_tipoescritura_IdTipo_Escritura`);
-
---
--- Indices de la tabla `tbl_proceso`
---
-ALTER TABLE `tbl_proceso`
- ADD PRIMARY KEY (`IdProceso`);
-
---
--- Indices de la tabla `tbl_requisito`
---
-ALTER TABLE `tbl_requisito`
- ADD PRIMARY KEY (`IdRequisito`);
-
---
--- Indices de la tabla `tbl_tipodocumento`
---
-ALTER TABLE `tbl_tipodocumento`
- ADD PRIMARY KEY (`IdTipoDocumento`);
-
---
--- Indices de la tabla `tbl_tipoempleado`
---
-ALTER TABLE `tbl_tipoempleado`
- ADD PRIMARY KEY (`IdTipo_Usuario`);
-
---
--- Indices de la tabla `tbl_tipoescritura`
---
-ALTER TABLE `tbl_tipoescritura`
- ADD PRIMARY KEY (`IdTipo_Escritura`), ADD KEY `fk_tbl_tipoescritura_tbl_clausula1_idx` (`tbl_clausula_IdClausula`);
-
---
--- Indices de la tabla `tbl_tipoescritura_legislacion`
---
-ALTER TABLE `tbl_tipoescritura_legislacion`
- ADD PRIMARY KEY (`IdTipoEscritura_Legislacion`), ADD KEY `fk_tbl_tipoEscritura_legislacion_tbl_legislacion1_idx` (`tbl_legislacion_IdLegislacion`), ADD KEY `fk_tbl_tipoEscritura_legislacion_tbl_tipoescritura1_idx` (`tbl_tipoescritura_IdTipo_Escritura`);
-
---
--- Indices de la tabla `tbl_tipo_cliente`
---
-ALTER TABLE `tbl_tipo_cliente`
- ADD PRIMARY KEY (`IdTipoCliente`);
-
---
--- Indices de la tabla `tipo_notario`
---
-ALTER TABLE `tipo_notario`
- ADD PRIMARY KEY (`idTipo_notario`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `tbl_bitacora`
---
-ALTER TABLE `tbl_bitacora`
-MODIFY `IdBitacora` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `tbl_clausula`
---
-ALTER TABLE `tbl_clausula`
-MODIFY `IdClausula` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `tbl_cliente`
---
-ALTER TABLE `tbl_cliente`
-MODIFY `Numero_Documento` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `tbl_detalle_bitacora`
---
-ALTER TABLE `tbl_detalle_bitacora`
-MODIFY `IdDetalle` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `tbl_empleado`
---
-ALTER TABLE `tbl_empleado`
-MODIFY `Numero_Documento` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `tbl_escritura`
---
-ALTER TABLE `tbl_escritura`
-MODIFY `IdEscritura` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `tbl_escritura_cliente`
---
-ALTER TABLE `tbl_escritura_cliente`
-MODIFY `Id_Escritura_Cliente` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `tbl_escritura_has_tbl_empleado`
---
-ALTER TABLE `tbl_escritura_has_tbl_empleado`
-MODIFY `Id_Escritura_Empleado` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `tbl_escritura_requisito`
---
-ALTER TABLE `tbl_escritura_requisito`
-MODIFY `Id_Escritura_Requisito` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `tbl_estadocivil`
---
-ALTER TABLE `tbl_estadocivil`
-MODIFY `IdEstado_Civil` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `tbl_genero`
---
-ALTER TABLE `tbl_genero`
-MODIFY `IdGenero` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `tbl_legislacion`
---
-ALTER TABLE `tbl_legislacion`
-MODIFY `IdLegislacion` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `tbl_notario`
---
-ALTER TABLE `tbl_notario`
-MODIFY `IdNotario` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `tbl_paragrafo`
---
-ALTER TABLE `tbl_paragrafo`
-MODIFY `IdParagrafo` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `tbl_plantilla`
---
-ALTER TABLE `tbl_plantilla`
-MODIFY `IdPlantilla` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `tbl_proceso`
---
-ALTER TABLE `tbl_proceso`
-MODIFY `IdProceso` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `tbl_requisito`
---
-ALTER TABLE `tbl_requisito`
-MODIFY `IdRequisito` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `tbl_tipodocumento`
---
-ALTER TABLE `tbl_tipodocumento`
-MODIFY `IdTipoDocumento` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `tbl_tipoempleado`
---
-ALTER TABLE `tbl_tipoempleado`
-MODIFY `IdTipo_Usuario` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `tbl_tipoescritura`
---
-ALTER TABLE `tbl_tipoescritura`
-MODIFY `IdTipo_Escritura` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `tbl_tipoescritura_legislacion`
---
-ALTER TABLE `tbl_tipoescritura_legislacion`
-MODIFY `IdTipoEscritura_Legislacion` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `tbl_tipo_cliente`
---
-ALTER TABLE `tbl_tipo_cliente`
-MODIFY `IdTipoCliente` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `tipo_notario`
---
-ALTER TABLE `tipo_notario`
-MODIFY `idTipo_notario` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Restricciones para tablas volcadas
 --
@@ -1050,91 +907,91 @@ MODIFY `idTipo_notario` int(11) NOT NULL AUTO_INCREMENT;
 -- Filtros para la tabla `tbl_bitacora`
 --
 ALTER TABLE `tbl_bitacora`
-ADD CONSTRAINT `fk_tbl_bitacora_tbl_escritura1` FOREIGN KEY (`tbl_escritura_IdEscritura`) REFERENCES `tbl_escritura` (`IdEscritura`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_tbl_bitacora_tbl_escritura1` FOREIGN KEY (`tbl_escritura_IdEscritura`) REFERENCES `tbl_escritura` (`IdEscritura`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `tbl_clausula`
 --
 ALTER TABLE `tbl_clausula`
-ADD CONSTRAINT `fk_tbl_clausula_tbl_paragrafo1` FOREIGN KEY (`tbl_paragrafo_IdParagrafo`) REFERENCES `tbl_paragrafo` (`IdParagrafo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_tbl_clausula_tbl_paragrafo1` FOREIGN KEY (`tbl_paragrafo_IdParagrafo`) REFERENCES `tbl_paragrafo` (`IdParagrafo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `tbl_cliente`
 --
 ALTER TABLE `tbl_cliente`
-ADD CONSTRAINT `fk_tbl_cliente_tbl_estadocivil1` FOREIGN KEY (`tbl_estadocivil_IdEstado_Civil`) REFERENCES `tbl_estadocivil` (`IdEstado_Civil`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-ADD CONSTRAINT `fk_tbl_cliente_tbl_genero1` FOREIGN KEY (`tbl_genero_IdGenero`) REFERENCES `tbl_genero` (`IdGenero`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-ADD CONSTRAINT `fk_tbl_cliente_tbl_tipo_cliente1` FOREIGN KEY (`tbl_tipo_cliente_IdTipoCliente`) REFERENCES `tbl_tipo_cliente` (`IdTipoCliente`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-ADD CONSTRAINT `fk_tbl_cliente_tbl_tipodocumento1` FOREIGN KEY (`tbl_tipodocumento_IdDocumento`) REFERENCES `tbl_tipodocumento` (`IdTipoDocumento`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_tbl_cliente_tbl_estadocivil1` FOREIGN KEY (`tbl_estadocivil_IdEstado_Civil`) REFERENCES `tbl_estadocivil` (`IdEstado_Civil`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tbl_cliente_tbl_genero1` FOREIGN KEY (`tbl_genero_IdGenero`) REFERENCES `tbl_genero` (`IdGenero`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tbl_cliente_tbl_tipo_cliente1` FOREIGN KEY (`tbl_tipo_cliente_IdTipoCliente`) REFERENCES `tbl_tipo_cliente` (`IdTipoCliente`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tbl_cliente_tbl_tipodocumento1` FOREIGN KEY (`tbl_tipodocumento_IdDocumento`) REFERENCES `tbl_tipodocumento` (`IdTipoDocumento`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `tbl_detalle_bitacora`
 --
 ALTER TABLE `tbl_detalle_bitacora`
-ADD CONSTRAINT `fk_tbl_detalle_bitacora_tbl_bitacora1` FOREIGN KEY (`tbl_bitacora_IdBitacora`) REFERENCES `tbl_bitacora` (`IdBitacora`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-ADD CONSTRAINT `fk_tbl_detalle_bitacora_tbl_proceso1` FOREIGN KEY (`tbl_proceso_IdProceso`) REFERENCES `tbl_proceso` (`IdProceso`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_tbl_detalle_bitacora_tbl_bitacora1` FOREIGN KEY (`tbl_bitacora_IdBitacora`) REFERENCES `tbl_bitacora` (`IdBitacora`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tbl_detalle_bitacora_tbl_proceso1` FOREIGN KEY (`tbl_proceso_IdProceso`) REFERENCES `tbl_proceso` (`IdProceso`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `tbl_empleado`
 --
 ALTER TABLE `tbl_empleado`
-ADD CONSTRAINT `fk_tbl_empleado_tbl_genero1` FOREIGN KEY (`tbl_genero_IdGenero`) REFERENCES `tbl_genero` (`IdGenero`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-ADD CONSTRAINT `fk_tbl_empleado_tbl_tipodocumento1` FOREIGN KEY (`tbl_tipodocumento_IdTipoDocumento`) REFERENCES `tbl_tipodocumento` (`IdTipoDocumento`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-ADD CONSTRAINT `fk_tbl_empleado_tbl_tipoempleado1` FOREIGN KEY (`tbl_tipoempleado_IdTipo_Usuario`) REFERENCES `tbl_tipoempleado` (`IdTipo_Usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_tbl_empleado_tbl_genero1` FOREIGN KEY (`tbl_genero_IdGenero`) REFERENCES `tbl_genero` (`IdGenero`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tbl_empleado_tbl_tipodocumento1` FOREIGN KEY (`tbl_tipodocumento_IdTipoDocumento`) REFERENCES `tbl_tipodocumento` (`IdTipoDocumento`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tbl_empleado_tbl_tipoempleado1` FOREIGN KEY (`tbl_tipoempleado_IdTipo_Usuario`) REFERENCES `tbl_tipoempleado` (`IdTipo_Empleado`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `tbl_escritura`
 --
 ALTER TABLE `tbl_escritura`
-ADD CONSTRAINT `fk_tbl_escritura_tbl_notario1` FOREIGN KEY (`tbl_notario_IdNotario`) REFERENCES `tbl_notario` (`IdNotario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-ADD CONSTRAINT `fk_tbl_escritura_tbl_plantilla1` FOREIGN KEY (`tbl_plantilla_IdPlantilla`) REFERENCES `tbl_plantilla` (`IdPlantilla`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-ADD CONSTRAINT `fk_tbl_escritura_tbl_tipoescritura1` FOREIGN KEY (`tbl_tipoescritura_IdTipo_Escritura`) REFERENCES `tbl_tipoescritura` (`IdTipo_Escritura`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_tbl_escritura_tbl_notario1` FOREIGN KEY (`tbl_notario_IdNotario`) REFERENCES `tbl_notario` (`IdNotario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tbl_escritura_tbl_plantilla1` FOREIGN KEY (`tbl_plantilla_IdPlantilla`) REFERENCES `tbl_plantilla` (`IdPlantilla`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tbl_escritura_tbl_tipoescritura1` FOREIGN KEY (`tbl_tipoescritura_IdTipo_Escritura`) REFERENCES `tbl_tipoescritura` (`IdTipo_Escritura`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `tbl_escritura_cliente`
 --
 ALTER TABLE `tbl_escritura_cliente`
-ADD CONSTRAINT `fk_tbl_escritura_cliente_tbl_cliente1` FOREIGN KEY (`tbl_cliente_Numero_Documento`) REFERENCES `tbl_cliente` (`Numero_Documento`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-ADD CONSTRAINT `fk_tbl_escritura_cliente_tbl_escritura1` FOREIGN KEY (`tbl_escritura_IdEscritura`) REFERENCES `tbl_escritura` (`IdEscritura`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_tbl_escritura_cliente_tbl_cliente1` FOREIGN KEY (`tbl_cliente_Numero_Documento`) REFERENCES `tbl_cliente` (`Numero_Documento`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tbl_escritura_cliente_tbl_escritura1` FOREIGN KEY (`tbl_escritura_IdEscritura`) REFERENCES `tbl_escritura` (`IdEscritura`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `tbl_escritura_has_tbl_empleado`
 --
 ALTER TABLE `tbl_escritura_has_tbl_empleado`
-ADD CONSTRAINT `fk_tbl_escritura_has_tbl_empleado_tbl_empleado1` FOREIGN KEY (`tbl_empleado_Numero_Documento`) REFERENCES `tbl_empleado` (`Numero_Documento`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-ADD CONSTRAINT `fk_tbl_escritura_has_tbl_empleado_tbl_escritura1` FOREIGN KEY (`tbl_escritura_IdEscritura`) REFERENCES `tbl_escritura` (`IdEscritura`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_tbl_escritura_has_tbl_empleado_tbl_empleado1` FOREIGN KEY (`tbl_empleado_Numero_Documento`) REFERENCES `tbl_empleado` (`Numero_Documento`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tbl_escritura_has_tbl_empleado_tbl_escritura1` FOREIGN KEY (`tbl_escritura_IdEscritura`) REFERENCES `tbl_escritura` (`IdEscritura`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `tbl_escritura_requisito`
 --
 ALTER TABLE `tbl_escritura_requisito`
-ADD CONSTRAINT `fk_tbl_escritura_requisito_tbl_escritura1` FOREIGN KEY (`tbl_escritura_IdEscritura`) REFERENCES `tbl_escritura` (`IdEscritura`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-ADD CONSTRAINT `fk_tbl_escritura_requisito_tbl_requisito1` FOREIGN KEY (`tbl_requisito_IdRequisito`) REFERENCES `tbl_requisito` (`IdRequisito`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_tbl_escritura_requisito_tbl_escritura1` FOREIGN KEY (`tbl_escritura_IdEscritura`) REFERENCES `tbl_escritura` (`IdEscritura`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tbl_escritura_requisito_tbl_requisito1` FOREIGN KEY (`tbl_requisito_IdRequisito`) REFERENCES `tbl_requisito` (`IdRequisito`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `tbl_notario`
 --
 ALTER TABLE `tbl_notario`
-ADD CONSTRAINT `fk_tbl_notario_Tipo_notario1` FOREIGN KEY (`Tipo_notario_idTipo_notario`) REFERENCES `tipo_notario` (`idTipo_notario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_tbl_notario_Tipo_notario1` FOREIGN KEY (`Tipo_notario_idTipo_notario`) REFERENCES `tipo_notario` (`idTipo_notario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `tbl_plantilla`
 --
 ALTER TABLE `tbl_plantilla`
-ADD CONSTRAINT `fk_tbl_plantilla_tbl_tipoescritura1` FOREIGN KEY (`tbl_tipoescritura_IdTipo_Escritura`) REFERENCES `tbl_tipoescritura` (`IdTipo_Escritura`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_tbl_plantilla_tbl_tipoescritura1` FOREIGN KEY (`tbl_tipoescritura_IdTipo_Escritura`) REFERENCES `tbl_tipoescritura` (`IdTipo_Escritura`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `tbl_tipoescritura`
 --
 ALTER TABLE `tbl_tipoescritura`
-ADD CONSTRAINT `fk_tbl_tipoescritura_tbl_clausula1` FOREIGN KEY (`tbl_clausula_IdClausula`) REFERENCES `tbl_clausula` (`IdClausula`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_tbl_tipoescritura_tbl_clausula1` FOREIGN KEY (`tbl_clausula_IdClausula`) REFERENCES `tbl_clausula` (`IdClausula`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `tbl_tipoescritura_legislacion`
 --
 ALTER TABLE `tbl_tipoescritura_legislacion`
-ADD CONSTRAINT `fk_tbl_tipoEscritura_legislacion_tbl_legislacion1` FOREIGN KEY (`tbl_legislacion_IdLegislacion`) REFERENCES `tbl_legislacion` (`IdLegislacion`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-ADD CONSTRAINT `fk_tbl_tipoEscritura_legislacion_tbl_tipoescritura1` FOREIGN KEY (`tbl_tipoescritura_IdTipo_Escritura`) REFERENCES `tbl_tipoescritura` (`IdTipo_Escritura`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_tbl_tipoEscritura_legislacion_tbl_legislacion1` FOREIGN KEY (`tbl_legislacion_IdLegislacion`) REFERENCES `tbl_legislacion` (`IdLegislacion`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tbl_tipoEscritura_legislacion_tbl_tipoescritura1` FOREIGN KEY (`tbl_tipoescritura_IdTipo_Escritura`) REFERENCES `tbl_tipoescritura` (`IdTipo_Escritura`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

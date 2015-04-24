@@ -44,11 +44,6 @@ return todoCorrecto;
   <div class="span7 center" align="center" >
 	<table>
 	<tr>
-		<td><label for="">Codigo Tipo Notario</label></td>
-		<td class="td"><input type="text" class="form-control" id="TxtCodigoTN"placeholder="Nombre del tipo de notario" required></td>
-
-	</tr>
-	<tr>
 		<td><label for="">Nombre del tipo de notario</label></td>
 		<td class="td"><input type="text" class="form-control"  maxlength="10" onkeyup="return ismaxlengt(this)" id="TxtNombreTipoNotario"placeholder="Nombre del tipo de notario" required></td>
 	</tr>
@@ -76,7 +71,6 @@ return todoCorrecto;
 		
 		<?php foreach ($tipoNotario as $value) {?>
 			<tr>
-				<td><?php echo $value->idTipo_notario; ?></td>
 				<td><?php echo $value->tipo_notario; ?></td>
 				<td><?php echo $value->Estado; ?></td>
 				<td><button class="btn btn-fab btn-raised btn-material-teal-300" onclick="ActualizarTipoNotario(this);"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>

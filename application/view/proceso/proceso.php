@@ -40,11 +40,6 @@ return todoCorrecto;
 	<div class="span7 center" align="center" >
 	<table>
 	<tr>
-		<td><label for="">Codigo Proceso</label></td>
-		<td class="td"><input type="text" id="TxtCodigoProce"class="form-control" placeholder="Descripcion del proceso" required tabindex="1"></td>
-	</tr>
-
-	<tr>
 		<td><label for="">Descripcion del proceso</label></td>
 		<td class="td"><input type="text" maxlength="10" onkeyup="return ismaxlengt(this)" id="TxtDescriProce"class="form-control" placeholder="Descripcion del proceso" required tabindex="2"></td>
 	</tr>
@@ -67,7 +62,6 @@ return todoCorrecto;
 	<table class="table table-hover" id="FondoT">
 		<thead >
 			<tr class="tabla" border="1" bordercolor="#FFFFFF" cellpadding="20">
-				<th>Codigo Proceso</th>
 				<th>Descripcion Del proceso</th>
 				<th>Nombre de proceso</th>
 				<th>Estado De proceso</th>
@@ -81,7 +75,6 @@ return todoCorrecto;
 		
 		<?php foreach ($Proceso as $value) {?>
 			<tr>
-				<td><?php echo $value->IdProceso; ?></td>
 				<td><?php echo $value->Descripcion; ?></td>
 				<td><?php echo $value->Nombre; ?></td>
 				<td><?php echo $value->Estado; ?></td>

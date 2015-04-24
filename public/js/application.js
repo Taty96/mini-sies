@@ -132,7 +132,7 @@ $('#btn_Add_TipoN').on('click', function(){
         Nombre = $("#TxtNombreGenero").val();
       
 
-            if (validarFormulario()) {
+            
             // send an ajax-request to this URL: current-server.com/songs/ajaxGetStats
             // "url" is defined in views/_templates/footer.php
             $.ajax({
@@ -160,7 +160,7 @@ $('#btn_Add_TipoN').on('click', function(){
                     // this will ALWAYS be executed, regardless if the ajax-call was success or not
                 });
 
-            };
+            
         });
 }
 
@@ -856,11 +856,10 @@ if ($('#btn_Add_Legislacion').length !== 0) {
         var nodoTd = nodo.parentNode;
         var nodoTr = nodoTd.parentNode;
         var nodosEnTr = nodoTr.getElementsByTagName('td');
-        var IdTipo_Empleado = nodosEnTr[0].textContent;
-        var NivelAcceso = nodosEnTr[1].textContent;
-        var Nombre = nodosEnTr[2].textContent;
-        var Estado = nodosEnTr[3].textContent;
-        document.getElementById('TxtIDTU').value = IdTipo_Empleado;
+        var NivelAcceso = nodosEnTr[0].textContent;
+        var Nombre = nodosEnTr[1].textContent;
+        var Estado = nodosEnTr[2].textContent;
+        NivelAcceso[0]+NivelAcceso,Nombre[1]+Nombre,Estado[2]+Estado;
         document.getElementById('TxtNVA').value = NivelAcceso;
         document.getElementById('TxtNombre').value = Nombre;
         document.getElementById('TxtEstado').value = Estado;
@@ -871,9 +870,9 @@ if ($('#btn_Add_Legislacion').length !== 0) {
         var nodoTd = nodo.parentNode;
         var nodoTr = nodoTd.parentNode;
         var nodosEnTr = nodoTr.getElementsByTagName('td');
-        var IdGenero = nodosEnTr[0].textContent;
-        var Nombre = nodosEnTr[1].textContent;
-        document.getElementById('TxtidGene').value = IdGenero;
+        var Nombre = nodosEnTr[0].textContent;
+
+        Nombre[0]+Nombre;
         document.getElementById('TxtNombreGenero').value = Nombre;
        document.getElementById("btn_Update_Genero").style.display = "initial";
 
@@ -883,10 +882,10 @@ if ($('#btn_Add_Legislacion').length !== 0) {
         var nodoTd = nodo.parentNode;
         var nodoTr = nodoTd.parentNode;
         var nodosEnTr = nodoTr.getElementsByTagName('td');
-        var IdTipoDocumento = nodosEnTr[0].textContent;
-        var Nombre = nodosEnTr[1].textContent;
-        var Sufijo = nodosEnTr[2].textContent;
-        document.getElementById('TxtDocumento').value = IdTipoDocumento;
+        var Nombre = nodosEnTr[0].textContent;
+        var Sufijo = nodosEnTr[1].textContent;
+
+        Nombre[0]+Nombre,Sufijo[1]+Sufijo;
         document.getElementById('TxtNombre').value = Nombre;
         document.getElementById('TxtSufijo').value = Sufijo;
        document.getElementById("btn_Update_TipoDocu").style.display = "initial";
@@ -897,11 +896,11 @@ if ($('#btn_Add_Legislacion').length !== 0) {
         var nodoTd = nodo.parentNode;
         var nodoTr = nodoTd.parentNode;
         var nodosEnTr = nodoTr.getElementsByTagName('td');
-        var IdLegislacion = nodosEnTr[0].textContent;
-        var Nombre = nodosEnTr[1].textContent;
-        var Descripcion = nodosEnTr[2].textContent;
-        var Estado = nodosEnTr[3].textContent;
-        document.getElementById('TxtCodigoLegislacion').value = IdLegislacion;
+        var Nombre = nodosEnTr[0].textContent;
+        var Descripcion = nodosEnTr[1].textContent;
+        var Estado = nodosEnTr[2].textContent;
+
+        Nombre[0]+Nombre,Descripcion[1]+Descripcion,Estado
         document.getElementById('txtNombreLeg').value = Nombre;
         document.getElementById('TxtDescripLegis').value = Descripcion;
         document.getElementById('TxtEstadoLegis').value = Estado;
@@ -913,10 +912,10 @@ if ($('#btn_Add_Legislacion').length !== 0) {
         var nodoTd = nodo.parentNode;
         var nodoTr = nodoTd.parentNode;
         var nodosEnTr = nodoTr.getElementsByTagName('td');
-        var IdTipoCliente = nodosEnTr[0].textContent;
-        var Nombre = nodosEnTr[1].textContent;
-        var Estado = nodosEnTr[2].textContent;
-        document.getElementById('TxtCodigoTC').value = IdTipoCliente;
+        var Nombre = nodosEnTr[0].textContent;
+        var Estado = nodosEnTr[1].textContent;
+
+        Nombre[0]+Nombre,Estado[1]+Estado;
         document.getElementById('TxtNombre').value = Nombre;
         document.getElementById('TxtEstado').value = Estado;
         document.getElementById("btn_Update_TipoCliente").style.display = "initial";
@@ -926,25 +925,26 @@ if ($('#btn_Add_Legislacion').length !== 0) {
         var nodoTd = nodo.parentNode;
         var nodoTr = nodoTd.parentNode;
         var nodosEnTr = nodoTr.getElementsByTagName('td');
-        var IdProceso = nodosEnTr[0].textContent;
-        var Descripcion = nodosEnTr[1].textContent;
-        var Nombre = nodosEnTr[2].textContent;
-        var Estado = nodosEnTr[3].textContent;
-        document.getElementById('TxtCodigoProce').value = IdProceso;
+        var Descripcion = nodosEnTr[0].textContent;
+        var Nombre = nodosEnTr[1].textContent;
+        var Estado = nodosEnTr[2].textContent;
+
+        Descripcion[0]+Descripcion,Nombre[1]+Nombre,Estado[2]+Estado;
+
         document.getElementById('TxtDescriProce').value = Descripcion;
         document.getElementById('TxtNombreProce').value = Nombre;
         document.getElementById('TxtEstadoProce').value = Estado;
         document.getElementById("btn_Update_Proceso").style.display = "initial";
     }
 
+
     function ActualizarTipoNotario (nodo) {
         var nodoTd = nodo.parentNode;
         var nodoTr = nodoTd.parentNode;
         var nodosEnTr = nodoTr.getElementsByTagName('td');
-        var idTipo_notario = nodosEnTr[0].textContent;
-        var tipo_notario = nodosEnTr[1].textContent;
-        var Estado = nodosEnTr[2].textContent;
-        document.getElementById('TxtCodigoTN').value = idTipo_notario;
+        var tipo_notario = nodosEnTr[0].textContent;
+        var Estado = nodosEnTr[1].textContent;
+        tipo_notario[0]+tipo_notario,Estado[1]+Estado;
         document.getElementById('TxtNombreTipoNotario').value = tipo_notario;
         document.getElementById('TxtEstadoTipoNotario').value = Estado;
         document.getElementById("btn_Update_TipoNotario").style.display = "initial";
@@ -954,9 +954,9 @@ if ($('#btn_Add_Legislacion').length !== 0) {
         var nodoTd = nodo.parentNode;
         var nodoTr = nodoTd.parentNode;
         var nodosEnTr = nodoTr.getElementsByTagName('td');
-        var IdEstado_Civil = nodosEnTr[0].textContent;
-        var Nombre = nodosEnTr[1].textContent;
-        document.getElementById('TxtCEC').value = IdEstado_Civil;
+        
+        var Nombre = nodosEnTr[0].textContent;
+        Nombre[0]+Nombre;
         document.getElementById('TxtNombre').value = Nombre;
         document.getElementById("btn_Update_EC").style.display = "initial";
     }
@@ -965,10 +965,10 @@ if ($('#btn_Add_Legislacion').length !== 0) {
         var nodoTd = nodo.parentNode;
         var nodoTr = nodoTd.parentNode;
         var nodosEnTr = nodoTr.getElementsByTagName('td');
-        var IdParagrafo = nodosEnTr[0].textContent;
+
         var Nombre = nodosEnTr[1].textContent;
         var Descripcion = nodosEnTr[2].textContent;
-        document.getElementById('TxtCParagrafo').value = IdParagrafo;
+        Nombre[0]+Nombre,Descripcion[1]+Descripcion;
         document.getElementById('TxtNombre').value = Nombre;
         document.getElementById('TxtDescripcion').value = Descripcion;
         document.getElementById("btn_Update_Paragrafo").style.display = "initial";
@@ -978,13 +978,13 @@ function ActualizarNotario (nodo) {
     var nodoTd = nodo.parentNode;
     var nodoTr = nodoTd.parentNode;
     var nodosEnTr = nodoTr.getElementsByTagName('td');
-    var IdNotario = nodosEnTr[0].textContent;
-    var Nombre = nodosEnTr[1].textContent;
-    var FechaInicio = nodosEnTr[2].textContent;
-    var FechaFin = nodosEnTr[3].textContent;
-    var NombreNotaria = nodosEnTr[4].textContent;
-    var Estado = nodosEnTr[5].textContent;
-    document.getElementById('TxtCN').value = IdNotario;
+    var Nombre = nodosEnTr[0].textContent;
+    var FechaInicio = nodosEnTr[1].textContent;
+    var FechaFin = nodosEnTr[2].textContent;
+    var NombreNotaria = nodosEnTr[3].textContent;
+    var Estado = nodosEnTr[4].textContent;
+
+    Nombre[0]+Nombre,FechaInicio[1]+FechaInicio,FechaFin[2]+FechaFin,NombreNotaria[3],Estado[4]+Estado;
     document.getElementById('TxtNombre').value = Nombre;
     document.getElementById('TxtFechaI').value = FechaInicio;
     document.getElementById('TxtFechaF').value = FechaFin;

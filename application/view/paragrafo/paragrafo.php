@@ -52,10 +52,6 @@
 <form>
 	<div class="span7 center" align="center">
 	<table>
-    <tr>
-		<td><label for="">Codigo Paragrafo</label></td>
-		<td class="td"><input type="text" readonly="readonly" id="TxtCParagrafo"class="form-control" placeholder="Codigo Paragrafo"></td>
-	</tr>
 	<tr>
 		<td><label for="">Nombre Paragrafo</label></td>
 		<td class="td"><input type="text" id="TxtNombre" name="texto" class="form-control" placeholder="Nombre Paragrafo" onkeydown="return validarLetras(event)" onKeyUp="valida_longitud()" required></td>
@@ -72,7 +68,6 @@
 	<table class="table table-hover" id="FondoT">
 		<thead>
 			<tr class="tabla" border="1" bordercolor="#FFFFFF" cellpadding="20">
-				<th>Codigo Paragrafo</th>
 				<th>Nombre Paragrafo</th>
 				<th>Estado Paragrafo</th>
 				<th>Acciones</th>
@@ -83,7 +78,6 @@
 		
 		<?php foreach ($Paragrafo as $value) {?>
 			<tr>
-				<td><?php echo $value->IdParagrafo; ?></td>
 				<td><?php echo $value->Nombre; ?></td>
 				<td><?php echo $value->Descripcion; ?></td>
 			    <td><button class="btn btn-fab btn-raised btn-material-teal-300" onclick="return ActualizarParagrafo(this);"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>

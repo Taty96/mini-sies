@@ -41,11 +41,6 @@ return todoCorrecto;
 	<div class="span7 center" align="center">
 	<table>
 	<tr>
-		<td><label for="">Documento</label></td>
-		<td class="td"><input type="text" class="form-control" maxlength="12" onkeyup="return ismaxlengt(this)"id="TxtDocumento" placeholder="Ejemplo: CC, TI." required  tabindex="1"></td>
-	</tr>
-
-	<tr>
 		<td><label for="">Nombre</label></td>
 		<td class="td"><input type="text" class="form-control" maxlength="12" onkeyup="return ismaxlengt(this)" id="TxtNombre" placeholder="Nombre" required tabindex="2" ></td>
 	</tr>
@@ -63,7 +58,6 @@ return todoCorrecto;
 	<table class="table table-hover" id="FondoT">
 		<thead>
 			<tr class="tabla" border="1" bordercolor="#FFFFFF" cellpadding="20">
-				<th>Documento</th>
 				<th>Nombre</th>
 				<th>Sufijo</th>
 				<th>Acciones</th>
@@ -74,7 +68,6 @@ return todoCorrecto;
 		
 		<?php foreach ($tipoDocumento as $value) {?>
 			<tr>
-				<td><?php echo $value->IdTipoDocumento; ?></td>
 				<td><?php echo $value->Nombre; ?></td>
 				<td><?php echo $value->Sufijo; ?></td>
 				<td><button class="btn btn-fab btn-raised btn-material-teal-300" onclick="ActualizarTipoDocumento(this);"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
