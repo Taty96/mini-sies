@@ -43,6 +43,13 @@ th{
 font-size: 20px;
 
 }
+
+#div2{
+    overflow:auto;
+     height:180px;
+     margin-right: 15px;
+
+}
  
 
 .tabla{
@@ -56,6 +63,10 @@ font-size: 20px;
 #FondoT{
 
 
+}
+
+.ColorMas{
+    color: black;
 }
 
 

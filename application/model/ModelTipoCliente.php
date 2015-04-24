@@ -20,7 +20,7 @@ class ModelTipoCliente{
 
 	public function addCliente($IdTipoCliente,$Nombre,$Estado)
 	{
-		$sql = "CALL SpGuardarTCliente(?,?,?)";
+		$sql = "CALL SpInsertarTCliente(?,?,?)";
 
 		$query = $this->db->prepare($sql);
 		$query->bindValue(1,$IdTipoCliente, PDO::PARAM_INT);

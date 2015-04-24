@@ -13,7 +13,50 @@
 		width: 400px;
 	}
 </style>
-<div class="span7 center" align="center">
+<head>
+	<script type="text/javascript">
+		function validarLetras(e) { // 1
+		    TxtNombre = (document.all) ? e.keyCode : e.which; 
+		    if (TxtNombre==8) return true; // backspace
+				if (TxtNombre==32) return true; // espacio
+				if (e.ctrlKey && TxtNombre==86) { return true;} //Ctrl v
+				if (e.ctrlKey && TxtNombre==67) { return true;} //Ctrl c
+				if (e.ctrlKey && TxtNombre==88) { return true;} //Ctrl x
+		 
+				patron = /[a-zA-Z]/; //patron
+		 
+				te = String.fromCharCode(TxtNombre); 
+				return patron.test(te); // prueba de patron
+		}	
+	</script>
+	<script> 
+		contenido_textarea = "" 
+		num_caracteres_permitidos = 25
+
+		function valida_longitud(){ 
+  			 num_caracteres = document.forms[0].texto.value.length 
+
+   			if (num_caracteres > num_caracteres_permitidos){ 
+      			document.forms[0].texto.value = contenido_textarea 
+   			}else{ 
+      			contenido_textarea = document.forms[0].texto.value	
+   			} 
+			if (num_caracteres >= num_caracteres_permitidos){ 
+      			document.forms[0].texto.style.color="#ff0000"; 
+   			}else{ 
+     			 document.forms[0].texto.style.color="#000000"; 
+    		}  
+		} 
+	</script>
+
+
+
+
+</head>
+
+
+
+	<div class="span7 center" align="center" >
 	<table>
     <tr>
 		<td><label for="">Codigo Notario</label></td>
@@ -21,7 +64,7 @@
 	</tr>
 	<tr>
 		<td><label for="">Nombre del notario</label></td>
-		<td class="td"><input type="text" id="TxtNombre" class="form-control" placeholder="Nombre Notario"></td>
+		<td class="td"><input type="text" id="TxtNombre" class="form-control" placeholder="Nombre Notario" onkeydown="return validarLetras(event)" onKeyUp="valida_longitud()"></td>
 	</tr>
 	<tr>
 		<td><label for="">Fecha de inicio</label></td>
@@ -33,16 +76,22 @@
 	</tr>
 	<tr>
 		<td><label for="">Nombre de la notaria</label></td>
-		<td class="td"><input type="text" id="TxtNombreN" class="form-control" placeholder="Nombre Notaria"></td>
+		<td class="td"><input type="text" id="TxtNombreN" class="form-control" placeholder="Nombre Notaria" onkeydown="return validarLetras(event)" onKeyUp="valida_longitud()"></td>
 	</tr>
 	<tr>
 		<td><label for="">Estado</label></td>
-		<td class="td"><input type="text" id="TxtEstado" class="form-control" placeholder="Estado"></td>
+		<td class="td"><select id="TxtEstado" name="texto" class="form-control">				
+		<option value ='0'>Inactivo</option>
+		<option value ='1' selected>Activo</option>
+
+	
+
+
+		</select></td>
 	</tr>
 	<tr>
-	<tr>
 		<td><label for="">Tipo Notario</label></td>
-		<td class="td"><select id="sltTipoN" class="form-control" OnFocus="this.blur()">					
+		<td class="td"><select id="sltTipoN" class="form-control">					
 			<?php 
 			   foreach ($SelectN as $value) {
 				  echo "<option value ='$value->idTipo_notario'>$value->tipo_notario</option>";
@@ -79,8 +128,8 @@
 				<td><?php echo $value->FechaFin; ?></td>
 				<td><?php echo $value->NombreNotaria; ?></td>
 				<td><?php echo $value->Estado; ?></td>
-				<td><?php echo $value->tipo; ?></td>
-			    <td><button class="btn btn-material-grey-500" onclick="return ActualizarNotario(this,'<?php echo $value->Tipo_notario_idTipo_notario; ?>');">Editar</button></td>
+				<td><?php echo $value->Tipo_notario_idTipo_notario; ?></td>
+			    <td><button class="btn btn-material-grey-500" onclick="ActualizarNotario(this);">Editar</button></td>
 			    <td><a class="btn btn-material-red-800" href="<?php echo URL . 'Notario/deleteNotario/' . htmlspecialchars($value->IdNotario, ENT_QUOTES, 'UTF-8'); ?>">Eliminar</a></td>
 			</tr>
 
@@ -88,3 +137,5 @@
 		</tbody>
 	</table>
 </div>
+
+

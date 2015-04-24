@@ -16,15 +16,13 @@ class ModelRequisito{
 
 	public function addRequisito($NombreDocumento,$Opcional)
 {
-		$sql = "CALL SpGuardarrequisito (?,?)";
+		$sql = "CALL SpInsertarRequisito (?,?)";
 
 		$query = $this->db->prepare($sql);
 		$query->bindValue(1,$NombreDocumento, PDO::PARAM_STR);
-		$query->bindValue(2, $Opcional, PDO::PARAM_BOOL);
+		$query->bindValue(2,$Opcional, PDO::PARAM_BOOL);
 
 
 		$query->execute();
-		
-
 }
 }

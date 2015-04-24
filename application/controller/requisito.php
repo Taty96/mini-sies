@@ -22,6 +22,7 @@ class requisito extends Controller
     }
 
       public function addRequisito(){
+        
       $this->model->addRequisito($_POST['textNombrerequisito'],$_POST['CkOpcional']);
 
     }

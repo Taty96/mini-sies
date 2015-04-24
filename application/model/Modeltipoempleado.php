@@ -17,7 +17,7 @@ class Modeltipoempleado{
 	public function addTempleado($NivelAcceso,$Nombre,$Estado)
 	{
 
-		$sql = "CALL SpGuardarTEmpleado (?,?,?)";
+		$sql = "CALL SpInsertarTEmpleado (?,?,?)";
 
 		$query = $this->db->prepare($sql);
 		$query->bindValue(1,$NivelAcceso, PDO::PARAM_INT);

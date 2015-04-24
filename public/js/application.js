@@ -14,6 +14,7 @@ $(function() {
         FechaFin = $("#TxtFechaF").val();
         NombreNotaria = $ ("#TxtNombreN").val();
         Estado = $("#TxtEstado").val();
+        Tipo_notario_idTipo_notario = $ ("#sltTipoN").val();
       
 
 
@@ -21,7 +22,7 @@ $(function() {
             $.ajax({
                 type: "POST",
                 url: url+"/Notario/UpdateNotario",
-                data: {"TxtCN": IdNotario, "TxtNombre": Nombre, "TxtFechaI": FechaInicio, "TxtFechaF": FechaFin, "TxtNombreN": NombreNotaria, "TxtEstado": Estado}
+                data: {"TxtCN": IdNotario, "TxtNombre": Nombre, "TxtFechaI": FechaInicio, "TxtFechaF": FechaFin, "TxtNombreN": NombreNotaria, "TxtEstado": Estado, "sltTipoN":Tipo_notario_idTipo_notario}
             })
             .done(function(result) {
                     // this will be executed if the ajax-call was successful
@@ -55,7 +56,7 @@ $(function() {
         Estado = $("#TxtEstado").val();
         idTipo_notario = $ ("#sltTipoN").val();
 
-               alert(idTipo_notario)
+             
                 // send an ajax-request to this URL: current-server.com/songs/ajaxGetStats
                 $.ajax({
                     type: "POST",
@@ -65,8 +66,6 @@ $(function() {
                 .done(function(result) {
 
                         alert(result);
-                        Console.log(result);
-                        
 
                     })
                 .fail(function() {
@@ -302,7 +301,7 @@ if ($('#btn_Add_TipoCli').length !== 0) {
             Nombrerequisito = $("#textNombrerequisito").val();
             Opcional = document.getElementById("CkOpcional").checked;
 
-                
+                alert(Opcional)
                 if (validarFormulario()) {
 
                 // send an ajax-request to this URL: current-server.com/songs/ajaxGetStats
@@ -314,7 +313,7 @@ if ($('#btn_Add_TipoCli').length !== 0) {
                 .done(function(result) {
 
                         alert(result);
-                        Console.log(result);
+                        
                         
 
                     })
@@ -975,7 +974,7 @@ if ($('#btn_Add_Legislacion').length !== 0) {
         document.getElementById("btn_Update_Paragrafo").style.display = "initial";
     }
 
-function ActualizarNotario (nodo,Tipo_notario_idTipo_notario) {
+function ActualizarNotario (nodo) {
     var nodoTd = nodo.parentNode;
     var nodoTr = nodoTd.parentNode;
     var nodosEnTr = nodoTr.getElementsByTagName('td');
@@ -991,7 +990,6 @@ function ActualizarNotario (nodo,Tipo_notario_idTipo_notario) {
     document.getElementById('TxtFechaF').value = FechaFin;
     document.getElementById('TxtNombreN').value = NombreNotaria;
     document.getElementById('TxtEstado').value = Estado;
-    seleccionar(Tipo_notario_idTipo_notario, 'sltTipoN');
     document.getElementById("btn_Update_Notario").style.display = "initial";
 }
 

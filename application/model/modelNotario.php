@@ -29,9 +29,9 @@ class ModelNotario
     }
 
 
-    public function UpdateNotario($IdNotario,$Nombre,$FechaInicio,$FechaFin,$NombreNotaria,$Estado)
+    public function UpdateNotario($IdNotario,$Nombre,$FechaInicio,$FechaFin,$NombreNotaria,$Estado,$TipoN)
     {
-        $sql = "CALL SpActualizarNotario (?,?,?,?,?,?)";
+        $sql = "CALL SpActualizarNotario (?,?,?,?,?,?,?)";
 
         $query = $this->db->prepare($sql);
         $query->bindValue(1, $IdNotario, PDO::PARAM_INT);
@@ -39,7 +39,8 @@ class ModelNotario
         $query->bindValue(3, $FechaInicio, PDO::PARAM_STR);    
         $query->bindValue(4, $FechaFin, PDO::PARAM_STR); 
         $query->bindValue(5, $NombreNotaria, PDO::PARAM_STR); 
-        $query->bindValue(6, $Estado, PDO::PARAM_INT);       
+        $query->bindValue(6, $Estado, PDO::PARAM_INT);  
+        $query->bindValue(7,$TipoN, PDO::PARAM_INT);        
         $query->execute();
     }
 

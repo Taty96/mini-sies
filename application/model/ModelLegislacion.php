@@ -16,7 +16,7 @@ class ModelLegislacion{
 
 	public function addLegislacion($Nombre,$Descripcion,$Estado)
 	{
-		 $sql = "CALL SpGuardarLegislacion (?,?,?)";
+		 $sql = "CALL SpInsertarLegislacion (?,?,?)";
 		 $query = $this->db->prepare($sql);
 		 $query->bindValue(1,$Nombre , PDO::PARAM_STR);
 		 $query->bindValue(2,$Descripcion, PDO::PARAM_STR);

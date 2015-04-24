@@ -58,6 +58,7 @@ return todoCorrecto;
 	</tr>
 	</table>
 	<button type="submit" class="btn btn-material-grey-500" style="display:none;"data-dismiss="modal" tabindex="6" id="btn_Update_Proceso"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Actualizar</button><button tabindex="5" id="btn_Add_Proceso" type="submit" data-dismiss="modal" class="btn btn-material-red-800"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>      Guardar</button>
+	<a type="button" class="btn btn-primary btn-lg" href="<?php echo URL;?>/Seguimiento/index">Seguimiento</a>
 </div>
 </form>
 

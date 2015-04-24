@@ -43,7 +43,7 @@ return todoCorrecto;
 	<table>
 	<tr>
 		<td><label for="">Nombre del requisito</label></td>
-		<td class="td"><input type="text" class="form-control" maxlength="12" onkeyup="return ismaxlengt(this)" id="textNombrerequisito" placeholder="Nombre del requisito" tabindex="1"></td>
+		<td class="td"><input type="text" class="form-control"  id="textNombrerequisito" placeholder="Nombre del requisito" tabindex="1"></td>
 	</tr>
 	<tr>
 		<td><label for="">Opcional</label></td>
@@ -56,6 +56,6 @@ return todoCorrecto;
 		</td>
 	</tr>
 	</table>
-	<button class="btn btn-material-grey-500">Cancelar</button><button tabindex="3" id="btn_Add_Requi" type="submit" data-dismiss="modal" class="btn btn-material-red-800">Guardar</button>
+	<button class="btn btn-material-grey-500">Cancelar</button><a tabindex="3" id="btn_Add_Requi"  data-dismiss="modal" class="btn btn-material-red-800">Guardar</a>
 </div>
 </form>
