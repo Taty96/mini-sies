@@ -23,6 +23,6 @@
 			$query->bindValue(4, $version, PDO::PARAM_STR);
 			$query->bindValue(5, $fk, PDO::PARAM_STR);
 			$query->execute();
-			return $query->fetchAll();
+			echo "<label class='btn btn-primary'>Registro Exitoso</label>";
 		}
 	}

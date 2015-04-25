@@ -30,7 +30,7 @@ class Login extends Controller
             //var_dump($_SESSION["user"]);
             $hoy = getdate();
             $firma= $hoy["mday"].$hoy["minutes"].($hoy["seconds"] + 10);
-            $temp = base64_encode($firma.",".$_SESSION["user"][0]->{"CC"}.",".$_SESSION["user"][0]->{"Nombre"}.",".$_SESSION["user"][0]->{"tbl_tipoempleado_IdTipo_Usuario"});
+            $temp = $this->encrypt($firma.",".$_SESSION["user"][0]->{"Numero_Documento"}.",".$_SESSION["user"][0]->{"Nombre"}.",".$_SESSION["user"][0]->{"tbl_tipoempleado_IdTipo_Usuario"});
             header('Location: '. URL .'Menu/?alter='.$temp);
         }else
         {

@@ -1,14 +1,10 @@
     <!-- jQuery, loaded in the recommended protocol-less way -->
-   
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js"></script>
-    >
+    <!-- more http://www.paulirish.com/2010/the-protocol-relative-url/ -->
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
-    <script src="<?php echo URL; ?>js/Tabla.js" type="text/javascript"></script>
 
     <!-- define the project's URL (to make AJAX calls possible, even when using this in sub-folders etc) -->
     <script>
+        //$.material.init()
         var url = "<?php echo URL; ?>";
     </script>
 
@@ -127,8 +123,5 @@
 
     <!-- Dropdown.js -->
     <script src="https://cdn.rawgit.com/FezVrasta/dropdown.js/master/jquery.dropdown.js"></script>
-    <script>
-      $("#dropdown-menu select").dropdown();
-    </script>
 </body>
 </html>

@@ -21,28 +21,30 @@ class Menu extends Controller
     {
         $hoy = getdate();
         $firma= $hoy["mday"].$hoy["minutes"].($hoy["seconds"] + 10);
-        $tabla = base64_decode($_GET["alter"]);
+        $tabla = $this->decrypt($_GET["alter"]);
         $tabla = explode(",", $tabla);
         if ($tabla[0] != $firma)
         {
             header('Location: '. URL .'Login/?alter=4');
         }
-        // load views
         $cliente = $this->model->listarCliente();
         $plantilla = $this->model->listarPlantilla();
-        $tabla = base64_decode($_GET["alter"]);
+        $tabla = $this->decrypt($_GET["alter"]);
         $tabla = explode(",", $tabla);
         $user = $tabla[1];
-        $menu = $this->model->getMenu($tabla[3]);
-        $menu = $menu[0]->{"Menu"};
+        $roles = $this->model->listarRol($user);
         require APP . 'view/_templates/header.php';
         require APP . 'view/menu/Menu.php';
         require APP . 'view/_templates/footer.php';
     }
-    public function crearEscritura()
+    public function getMenu()
     {
-        $cliente = base64_encode($_POST["dllCliente"]);
-        $plantilla = base64_encode($_POST["dllPlantilla"]);
-        header('Location: '. URL .'Escritura/?c='.$cliente."&p=".$plantilla);
+        $id = $_POST["id"];
+        $lista = $this->model->getMenu($id);
+        $output = "";
+        foreach ($lista as $item) {
+            $output = $output.$item->{"innerHTML"};
+        }
+        echo $output;
     }
 }

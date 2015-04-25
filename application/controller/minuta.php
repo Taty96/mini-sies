@@ -34,11 +34,11 @@ class Minuta extends Controller
         $uploadedfileload="true";
         $uploadedfile_size=$_FILES['uploadedfile']['size'];
         if ($_FILES['uploadedfile']['size']>1000000)
-        {return true;
+        {//return true;
         $uploadedfileload="false";}
         
         if ($this->endsWith($_FILES['uploadedfile']['name'],'.docx')!=1)
-        {return true;
+        {//return true;
         $uploadedfileload="false";}
 
         $file_name=$_FILES['uploadedfile']['name'];
@@ -46,12 +46,12 @@ class Minuta extends Controller
         if($uploadedfileload=="true"){
 
         if(move_uploaded_file ($_FILES['uploadedfile']['tmp_name'], $add)){
-        return true;
+        return $_FILES['uploadedfile']['name'];
         }else{return false;}
 
         }else{/*echo $msg;*/}
     }
     public function registrar(){
-        $this->model->registrar($_POST["txtDescripcion"], $_POST["txtNombre"], $_POST[""]);
+        $this->model->registrar($_POST["txtDescripcion"], $_POST["txtNombre"], $this->subir(), $_POST["txtVersion"], $_POST["ddltipo"]);
     }
 }

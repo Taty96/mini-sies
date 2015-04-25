@@ -1,4 +1,4 @@
-<form enctype="multipart/form-data" action="<?php echo URL; ?>minuta/subir" method="POST">
+<form enctype="multipart/form-data" action="<?php echo URL; ?>minuta/registrar" method="POST">
 	<div class="span7 center" align="center">
 	<table>
 	<tr>

@@ -20,34 +20,5 @@
 		<td class="td"><input type="text" id ="TxtNombreGenero" class="form-control" placeholder="Nombre del genero"></td>
 	</tr>
 	</table>
-	<button type="submit" class="btn btn-material-grey-500" style="display:none;"data-dismiss="modal" id="btn_Update_Genero"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Actualizar</button><button id="btn_Add_Genero" type="submit" data-dismiss="modal" class="btn btn-material-red-800"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Guardar</button>
+	<button class="btn btn-material-grey-500">Cancelar</button><button id="btn_Add_Genero" type="submit" data-dismiss="modal" class="btn btn-material-red-800">Guardar</button>
 </div>
-
-
-
-<div class="span6" id="div1">
-	<table class="table table-hover" id="FondoT">
-		<thead>
-			<tr class="tabla" border="1" bordercolor="#FFFFFF" cellpadding="20">
-				<th>Nombre</th>
-				<th>Acciones</th>
-			</tr>
-		</thead>
-
-		<tbody>
-		
-		<?php foreach ($tiposGenero as $value) {?>
-			<tr>
-				<td><?php echo $value->Nombre; ?></td>
-				<td><button class="btn btn-fab btn-raised btn-material-teal-300" onclick="ActualizarGenero(this);"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
-				<a class="btn btn-fab btn-raised btn-material-teal-700"  href="<?php echo URL . 'genero/deleteGenero/' . htmlspecialchars($value->IdGenero, ENT_QUOTES, 'UTF-8'); ?>"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
-
-			</tr>
-
-		<?php } ?>
-
-		
-		</tbody>
-	</table>
-</div>
-

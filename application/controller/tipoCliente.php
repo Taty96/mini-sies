@@ -10,41 +10,15 @@
  */
 class tipoCliente extends Controller
 {
- function __construct(){
-        parent::__construct("ModelTipoCliente");
-    }   
+    /**
+     * PAGE: index
+     * This method handles the error page that will be shown when a page is not found
+     */
     public function index()
     {
-         $tipoCliente = $this->model->getTipoCliente();
-        
-
-
+        // load views
         require APP . 'view/_templates/header.php';
         require APP . 'view/tipoCliente/tipoCliente.php';
         require APP . 'view/_templates/footer.php';
     }
-
-       public function addCliente(){
-        $this->model->addCliente($_POST['TxtCodigoTC'],$_POST['TxtNombre'],$_POST['TxtEstado']);
-
-    }
-
-    public function UpdateCliente()
-    {
-       $this->model->UpdateCliente($_POST['TxtCodigoTC'],$_POST['TxtNombre'],$_POST['TxtEstado']);
- 
-    }
-
-
-      public function deleteTipoCliente($IdTipoCliente)
-    {
-        if (isset($IdTipoCliente)) {
-            $this->model->deleteTipoCliente($IdTipoCliente);
-        }
-        header('location: ' . URL . 'tipoCliente');
-    }
-
-    
-
-
 }
